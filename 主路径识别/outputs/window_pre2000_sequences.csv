@@ -1,0 +1,330 @@
+﻿path_id,position,patent_no,app_year,country,is_internal,title,title_cn,source
+1,1,US10349898B2,,US,False,,,
+1,2,US6317627B1,1999.0,US,True,Anesthesia monitoring system based on electroencephalographic signals,基于脑电信号的麻醉监测系统,incoPat
+1,3,US6230049B1,1999.0,US,True,Integrated system for EEG monitoring and electrical stimulation with a multiplicity of electrodes,具有多个电极的用于EEG监测和电刺激的集成系统,incoPat
+1,4,US6016449A,1997.0,US,True,System for treatment of neurological disorders,神经系统疾病治疗系统,incoPat
+1,5,US5626627A,1995.0,US,True,Electroconvulsive therapy method using ICTAL EEG data as an indicator of ECT seizure adequacy,以ICTAL EEG数据作为ECT癫痫发作充分性指标的电休克治疗方法,incoPat
+1,6,US5269302A,1992.0,US,True,Electroconvulsive therapy apparatus and method for monitoring patient seizures,用于监测患者癫痫发作电惊厥治疗设备和方法,incoPat
+1,7,US4878498A,1989.0,US,True,Electroconvulsive therapy apparatus and method for automatic monitoring of patient seizures,用于自动监测患者癫痫发作电惊厥治疗设备和方法,incoPat
+1,8,US4744029A,,US,False,,,
+1,9,US4579125A,1984.0,US,True,Real-time EEG spectral analyzer,实时脑电频谱分析仪,incoPat
+1,10,US4493327A,1982.0,US,True,Automatic evoked potential detection,诱发电位自动检测,incoPat
+1,11,US4408616A,1981.0,US,True,Brain electricaL activity mapping,脑电地形图,incoPat
+1,12,US4201224A,1978.0,US,True,Electroencephalographic method and system for the quantitative description of patient brain states,用于定量描述患者脑状态的脑电图方法和系统,incoPat
+1,13,US4092981A,1976.0,US,True,Method and apparatus for brain waveform examination,一种脑波检测方法及装置,incoPat
+1,14,US3978847A,1974.0,US,True,Multiple channel phase integrating biofeedback computing method,多通道相位积分生物反馈计算方法,incoPat
+1,15,US3753433A,1971.0,US,True,ELECTROENCEPHALOPHONE AND FEEDBACK SYSTEM,脑电检波器和反馈系统,incoPat
+1,16,US3565058A,,US,False,,,
+2,1,US7305370B2,,US,False,,,
+2,2,US6549804B1,1999.0,US,True,"System for the prediction,  rapid detection,  warning,  prevention or control of changes in activity states in the brain of a subject",用于预测，快速检测，警告，预防或控制受试者大脑中活动状态变化的系统,incoPat
+2,3,US6304775B1,1999.0,US,True,Seizure warning and prediction,癫痫发作警告和预测,incoPat
+2,4,US5743860A,1996.0,US,True,Apparatus and method for epileptic seizure detection using non-linear techniques,使用非线性技术用于癫痫发作检测的设备和方法,incoPat
+2,5,US5626145A,1996.0,US,True,Method and apparatus for extraction of low-frequency artifacts from brain waves for alertness detection,用于从用于警觉性检测的脑电波中提取低频伪影的方法和装置,incoPat
+2,6,US5311876A,1992.0,US,True,Automatic detection of seizures using electroencephalographic signals,利用脑电图信号自动检测癫痫发作,incoPat
+2,7,US4878498A,1989.0,US,True,Electroconvulsive therapy apparatus and method for automatic monitoring of patient seizures,用于自动监测患者癫痫发作电惊厥治疗设备和方法,incoPat
+2,8,US4744029A,,US,False,,,
+2,9,US4610259A,1983.0,US,True,EEG signal analysis system,脑电信号分析系统,incoPat
+2,10,US4493327A,1982.0,US,True,Automatic evoked potential detection,诱发电位自动检测,incoPat
+2,11,US4275744A,1979.0,US,True,Auditory response detection method and apparatus,一种听觉响应检测方法及装置,incoPat
+2,12,US4083365A,1976.0,US,True,Dual integrator EEG analyzer,双积分脑电图分析仪,incoPat
+2,13,US3893450A,1973.0,US,True,METHOD AND APPARATUS FOR BRAIN WAVEFORM EXAMINATION,一种脑波检测方法及装置,incoPat
+2,14,US3696808A,1970.0,US,True,METHOD AND SYSTEM FOR BRAIN WAVE ANALYSIS,一种脑波分析方法及系统,incoPat
+2,15,US3222598A,,US,False,,,
+3,1,US20060265025A1,,US,False,,,
+3,2,US6549804B1,1999.0,US,True,"System for the prediction,  rapid detection,  warning,  prevention or control of changes in activity states in the brain of a subject",用于预测，快速检测，警告，预防或控制受试者大脑中活动状态变化的系统,incoPat
+3,3,US6230049B1,1999.0,US,True,Integrated system for EEG monitoring and electrical stimulation with a multiplicity of electrodes,具有多个电极的用于EEG监测和电刺激的集成系统,incoPat
+3,4,US5857978A,1996.0,US,True,Epileptic seizure prediction by non-linear methods,利用非线性方法预测癫痫发作,incoPat
+3,5,US5311876A,1992.0,US,True,Automatic detection of seizures using electroencephalographic signals,利用脑电图信号自动检测癫痫发作,incoPat
+3,6,US4873981A,1988.0,US,True,Electroconvulsive therapy apparatus and method for automatic monitoring of patient seizures,用于自动监测患者癫痫发作电惊厥治疗设备和方法,incoPat
+3,7,US4744029A,,US,False,,,
+3,8,US4550736A,1984.0,US,True,Movement artifact detector for sleep analysis,用于睡眠分析的运动伪影检测器,incoPat
+3,9,US4417592A,1981.0,US,True,Digital electroencephalographic instrument and method,数字脑电图仪及方法,incoPat
+3,10,US4201224A,1978.0,US,True,Electroencephalographic method and system for the quantitative description of patient brain states,用于定量描述患者脑状态的脑电图方法和系统,incoPat
+3,11,US3901215A,1973.0,US,True,METHOD OF TESTING THE SENSES AND COGNITION OF SUBJECTS,测试受试者的感觉和认知的方法,incoPat
+3,12,US3696808A,1970.0,US,True,METHOD AND SYSTEM FOR BRAIN WAVE ANALYSIS,一种脑波分析方法及系统,incoPat
+3,13,US3413546A,,US,False,,,
+4,1,US6978183B2,,US,False,,,
+4,2,US6304775B1,1999.0,US,True,Seizure warning and prediction,癫痫发作警告和预测,incoPat
+4,3,US5815413A,,US,False,,,
+4,4,US5626145A,1996.0,US,True,Method and apparatus for extraction of low-frequency artifacts from brain waves for alertness detection,用于从用于警觉性检测的脑电波中提取低频伪影的方法和装置,incoPat
+4,5,US5392788A,1993.0,US,True,Method and device for interpreting concepts and conceptual thought from brainwave data and for assisting for diagnosis of brainwave disfunction,一种从脑波数据解释概念和概念思维并辅助诊断脑波功能障碍的方法和装置,incoPat
+4,6,US4987903A,1988.0,US,True,Method and apparatus for identifying and alleviating semantic memory deficiencies,用于识别和减轻语义记忆缺陷的方法和装置,incoPat
+4,7,US4794533A,,US,False,,,
+4,8,US4610259A,1983.0,US,True,EEG signal analysis system,脑电信号分析系统,incoPat
+4,9,US4201224A,1978.0,US,True,Electroencephalographic method and system for the quantitative description of patient brain states,用于定量描述患者脑状态的脑电图方法和系统,incoPat
+4,10,US3893450A,1973.0,US,True,METHOD AND APPARATUS FOR BRAIN WAVEFORM EXAMINATION,一种脑波检测方法及装置,incoPat
+4,11,US3696808A,1970.0,US,True,METHOD AND SYSTEM FOR BRAIN WAVE ANALYSIS,一种脑波分析方法及系统,incoPat
+4,12,US3123768A,,US,False,,,
+5,1,US11026617B2,,US,False,,,
+5,2,US6343226B1,1999.0,US,True,Multifunction electrode for neural tissue stimulation,用于神经组织刺激的多功能电极,incoPat
+5,3,US6171239B1,1998.0,US,True,"Systems,  methods,  and devices for controlling external devices by signals derived directly from the nervous system",利用直接来自神经系统的信号控制外部设备的系统，方法和设备,incoPat
+5,4,US5638826A,1995.0,US,True,Communication method and system using brain waves for multidimensional control,使用脑电波进行多维控制的通信方法和系统,BCI
+5,5,US5474082A,1993.0,US,True,Brain-body actuated system,脑-体驱动系统,BCI
+5,6,US5213338A,1991.0,US,True,Brain wave-directed amusement device,脑电波导向娱乐装置,incoPat
+5,7,US4955388A,1987.0,US,True,Electroencephalographic attention monitor,脑电图注意力监视器,incoPat
+5,8,US4744029A,,US,False,,,
+5,9,US4610259A,1983.0,US,True,EEG signal analysis system,脑电信号分析系统,incoPat
+5,10,US4412547A,1981.0,US,True,Neurological monitoring device,神经学监测装置,incoPat
+5,11,US4170225A,,US,False,,,
+5,12,US3958563A,1974.0,US,True,Two speed system for EEG recording,双速脑电记录系统,incoPat
+5,13,US3841309A,1973.0,US,True,METHOD OF ANALYZING CEREBRAL ELECTRICAL ACTIVITY,脑电分析方法,incoPat
+5,14,US3174478A,,US,False,,,
+6,1,US20090172640A1,,US,False,,,
+6,2,US6061593A,1998.0,US,True,EEG d-c voltage shift as a means for detecting the onset of a neurological event,作为检测神经事件开始的手段的EEG D-C电压偏移,incoPat
+6,3,US5743860A,1996.0,US,True,Apparatus and method for epileptic seizure detection using non-linear techniques,使用非线性技术用于癫痫发作检测的设备和方法,incoPat
+6,4,US5392788A,1993.0,US,True,Method and device for interpreting concepts and conceptual thought from brainwave data and for assisting for diagnosis of brainwave disfunction,一种从脑波数据解释概念和概念思维并辅助诊断脑波功能障碍的方法和装置,incoPat
+6,5,US5113870A,1990.0,US,True,"Method and apparatus for the analysis,  display and classification of event related potentials by interpretation of P3 responses",用于通过解释P3响应来分析、显示和分类事件相关电位的方法和装置,incoPat
+6,6,US4932416A,1987.0,US,True,"Method for the analysis,  display and classification of event related potentials by interpretation of P3 responses",通过解释P3反应分析、显示和分类事件相关电位的方法,incoPat
+6,7,US4610259A,1983.0,US,True,EEG signal analysis system,脑电信号分析系统,incoPat
+6,8,US4412547A,1981.0,US,True,Neurological monitoring device,神经学监测装置,incoPat
+6,9,US4213465A,1978.0,US,True,Electroencephalograph,脑电图仪,incoPat
+6,10,US4037586A,1976.0,US,True,Electroencephalograph display,脑电图显示,incoPat
+6,11,US3910258A,1974.0,US,True,CEREBRAL ACTIVITY MONITOR,脑活动监视器,incoPat
+6,12,US3706308A,1970.0,US,True,LIFE DETECTING MEDICAL INSTRUMENT,生命探测医疗器械,incoPat
+6,13,US3384075A,,US,False,,,
+7,1,US9895107B2,,US,False,,,
+7,2,US6317627B1,1999.0,US,True,Anesthesia monitoring system based on electroencephalographic signals,基于脑电信号的麻醉监测系统,incoPat
+7,3,US6067467A,1998.0,US,True,EEG operative and post-operative patient monitoring method,一种脑电图手术及术后病人监护方法,incoPat
+7,4,US5320109A,1991.0,US,True,Cerebral biopotential analysis system and method,脑生物电分析系统和方法,incoPat
+7,5,US4974602A,1989.0,US,True,Arrangement for analyzing local bioelectric currents in biological tissue complexes,用于分析生物组织复合物中局部生物电流的装置,incoPat
+7,6,US4736751A,1986.0,US,True,Brain wave source network location scanning method and system,一种脑波源网络位置扫描方法及系统,incoPat
+7,7,US4649482A,1984.0,US,True,Brain electrical activity topographical mapping,脑电地形图,incoPat
+7,8,US4498080A,1983.0,US,True,Apparatus and method for topographic display of multichannel data,用于多通道数据地形显示的装置和方法,incoPat
+7,9,US4201224A,1978.0,US,True,Electroencephalographic method and system for the quantitative description of patient brain states,用于定量描述患者脑状态的脑电图方法和系统,incoPat
+7,10,US4092981A,1976.0,US,True,Method and apparatus for brain waveform examination,一种脑波检测方法及装置,incoPat
+7,11,US3890957A,,US,False,,,
+7,12,US3760796A,1971.0,US,True,METHOD AND APPARATUS FOR AUTOMATIC ANALYSIS OF BRAIN WAVE SIGNALS,一种脑波信号自动分析方法及装置,incoPat
+7,13,US2902030A,,US,False,,,
+8,1,US7787944B2,,US,False,,,
+8,2,US6549804B1,1999.0,US,True,"System for the prediction,  rapid detection,  warning,  prevention or control of changes in activity states in the brain of a subject",用于预测，快速检测，警告，预防或控制受试者大脑中活动状态变化的系统,incoPat
+8,3,US5815413A,,US,False,,,
+8,4,US5392788A,1993.0,US,True,Method and device for interpreting concepts and conceptual thought from brainwave data and for assisting for diagnosis of brainwave disfunction,一种从脑波数据解释概念和概念思维并辅助诊断脑波功能障碍的方法和装置,incoPat
+8,5,US5243517A,1988.0,US,True,Method and apparatus for physiological evaluation of short films and entertainment materials,短片和娱乐材料的生理评价方法和装置,incoPat
+8,6,US4794533A,,US,False,,,
+8,7,US4610259A,1983.0,US,True,EEG signal analysis system,脑电信号分析系统,incoPat
+8,8,US4407299A,1981.0,US,True,Brain electrical activity mapping,脑电地形图,incoPat
+8,9,US4171696A,1978.0,US,True,Prevention of distortion of brainwave data due to eye movement or other artifacts,防止由于眼球运动或其他伪影引起的脑波数据失真,incoPat
+8,10,US3837331A,1972.0,US,True,SYSTEM AND METHOD FOR CONTROLLING THE NERVOUS SYSTEM OF A LIVING ORGANISM,用于控制活生物体神经系统的系统和方法,incoPat
+8,11,US3753433A,1971.0,US,True,ELECTROENCEPHALOPHONE AND FEEDBACK SYSTEM,脑电检波器和反馈系统,incoPat
+8,12,US3488586A,,US,False,,,
+9,1,US10596367B2,,US,False,,,
+9,2,US6304775B1,1999.0,US,True,Seizure warning and prediction,癫痫发作警告和预测,incoPat
+9,3,US5857978A,1996.0,US,True,Epileptic seizure prediction by non-linear methods,利用非线性方法预测癫痫发作,incoPat
+9,4,US5392788A,1993.0,US,True,Method and device for interpreting concepts and conceptual thought from brainwave data and for assisting for diagnosis of brainwave disfunction,一种从脑波数据解释概念和概念思维并辅助诊断脑波功能障碍的方法和装置,incoPat
+9,5,US4913160A,1988.0,US,True,Electroencephalographic system and method using factor structure of the evoked potentials,使用诱发电位因子结构的脑电图系统和方法,incoPat
+9,6,US4610259A,1983.0,US,True,EEG signal analysis system,脑电信号分析系统,incoPat
+9,7,US4408616A,1981.0,US,True,Brain electricaL activity mapping,脑电地形图,incoPat
+9,8,US4201224A,1978.0,US,True,Electroencephalographic method and system for the quantitative description of patient brain states,用于定量描述患者脑状态的脑电图方法和系统,incoPat
+9,9,US3809069A,,US,False,,,
+10,1,US8423106B2,,US,False,,,
+10,2,US6317627B1,1999.0,US,True,Anesthesia monitoring system based on electroencephalographic signals,基于脑电信号的麻醉监测系统,incoPat
+10,3,US6230049B1,1999.0,US,True,Integrated system for EEG monitoring and electrical stimulation with a multiplicity of electrodes,具有多个电极的用于EEG监测和电刺激的集成系统,incoPat
+10,4,US5311876A,1992.0,US,True,Automatic detection of seizures using electroencephalographic signals,利用脑电图信号自动检测癫痫发作,incoPat
+10,5,US5181520A,1990.0,US,True,Method and apparatus for analyzing an electro-encephalogram,用于分析脑电图的方法和装置,incoPat
+10,6,US4907597A,,US,False,,,
+10,7,US4557270A,1983.0,US,True,Electroencephalographic system for intra-operative open-heart surgery,心内直视手术的脑电图系统,incoPat
+10,8,US4201224A,1978.0,US,True,Electroencephalographic method and system for the quantitative description of patient brain states,用于定量描述患者脑状态的脑电图方法和系统,incoPat
+10,9,US4092981A,1976.0,US,True,Method and apparatus for brain waveform examination,一种脑波检测方法及装置,incoPat
+10,10,US3760796A,1971.0,US,True,METHOD AND APPARATUS FOR AUTOMATIC ANALYSIS OF BRAIN WAVE SIGNALS,一种脑波信号自动分析方法及装置,incoPat
+10,11,US3138759A,,US,False,,,
+11,1,US20100017225A1,,US,False,,,
+11,2,US6167298A,1999.0,US,True,Devices and methods for maintaining an alert state of consciousness through brain wave monitoring,通过脑电波监测保持清醒状态的装置和方法,incoPat
+11,3,US5626145A,1996.0,US,True,Method and apparatus for extraction of low-frequency artifacts from brain waves for alertness detection,用于从用于警觉性检测的脑电波中提取低频伪影的方法和装置,incoPat
+11,4,US5349962A,1993.0,US,True,Method and apparatus for detecting epileptic seizures,用于检测癫痫发作的方法和装置,incoPat
+11,5,US4873981A,1988.0,US,True,Electroconvulsive therapy apparatus and method for automatic monitoring of patient seizures,用于自动监测患者癫痫发作电惊厥治疗设备和方法,incoPat
+11,6,US4744029A,,US,False,,,
+11,7,US4557270A,1983.0,US,True,Electroencephalographic system for intra-operative open-heart surgery,心内直视手术的脑电图系统,incoPat
+11,8,US4408616A,1981.0,US,True,Brain electricaL activity mapping,脑电地形图,incoPat
+11,9,US3958563A,1974.0,US,True,Two speed system for EEG recording,双速脑电记录系统,incoPat
+11,10,US3513834A,,US,False,,,
+12,1,US20080101660A1,,US,False,,,
+12,2,US6292688B1,1996.0,US,True,Method and apparatus for analyzing neurological response to emotion-inducing stimuli,分析对情绪诱导刺激的神经响应的方法和装置,incoPat
+12,3,US5392788A,1993.0,US,True,Method and device for interpreting concepts and conceptual thought from brainwave data and for assisting for diagnosis of brainwave disfunction,一种从脑波数据解释概念和概念思维并辅助诊断脑波功能障碍的方法和装置,incoPat
+12,4,US4949725A,1988.0,US,True,Apparatus and method for displaying electrical activity generated within a living body,用于显示在生物体内产生电活动的装置和方法,incoPat
+12,5,US4736751A,1986.0,US,True,Brain wave source network location scanning method and system,一种脑波源网络位置扫描方法及系统,incoPat
+12,6,US4649482A,1984.0,US,True,Brain electrical activity topographical mapping,脑电地形图,incoPat
+12,7,US4408616A,1981.0,US,True,Brain electricaL activity mapping,脑电地形图,incoPat
+12,8,US4171696A,1978.0,US,True,Prevention of distortion of brainwave data due to eye movement or other artifacts,防止由于眼球运动或其他伪影引起的脑波数据失真,incoPat
+12,9,US3880144A,,US,False,,,
+12,10,US3706308A,1970.0,US,True,LIFE DETECTING MEDICAL INSTRUMENT,生命探测医疗器械,incoPat
+12,11,US3087487A,,US,False,,,
+13,1,US20060094970A1,,US,False,,,
+13,2,US6549804B1,1999.0,US,True,"System for the prediction,  rapid detection,  warning,  prevention or control of changes in activity states in the brain of a subject",用于预测，快速检测，警告，预防或控制受试者大脑中活动状态变化的系统,incoPat
+13,3,US5743860A,1996.0,US,True,Apparatus and method for epileptic seizure detection using non-linear techniques,使用非线性技术用于癫痫发作检测的设备和方法,incoPat
+13,4,US5626145A,1996.0,US,True,Method and apparatus for extraction of low-frequency artifacts from brain waves for alertness detection,用于从用于警觉性检测的脑电波中提取低频伪影的方法和装置,incoPat
+13,5,US5392788A,1993.0,US,True,Method and device for interpreting concepts and conceptual thought from brainwave data and for assisting for diagnosis of brainwave disfunction,一种从脑波数据解释概念和概念思维并辅助诊断脑波功能障碍的方法和装置,incoPat
+13,6,US4953968A,1989.0,US,True,Automated visual assessment system with steady visual evoked potential stimulator and product detector,具有稳定视觉诱发电位刺激器和产物检测器的自动视觉评估系统,incoPat
+13,7,US4697598A,,US,False,,,
+13,8,US4085739A,1976.0,US,True,Electroencephalograph cap and electrode harness,脑电图机帽和电极线束,incoPat
+13,9,US3998213A,1975.0,US,True,Self-adjustable holder for automatically positioning electroencephalographic electrodes,一种自动定位脑电图电极的自调式夹持器,incoPat
+13,10,US3658054A,,US,False,,,
+13,11,US3490439A,1965.0,US,True,ELECTRODE HOLDER FOR USE WITH AN ELECTROENCEPHALOGRAPH,与脑电图仪一起使用电极夹持器,incoPat
+13,12,US2549836A,1946.0,US,True,Electrode-carrying headgear for electroencephalographic analysis,脑电图分析用电极携带头盔,incoPat
+13,13,US1684860A,,US,False,,,
+14,1,US9370457B2,,US,False,,,
+14,2,US6272378B1,1999.0,US,True,Device and method for determining sleep profiles,一种确定睡眠简档的装置及方法,incoPat
+14,3,US5999846A,1996.0,US,True,Physiological monitoring,生理监测,incoPat
+14,4,US5450855A,1994.0,US,True,Method and system for modification of condition with neural biofeedback using left-right brain wave asymmetry,一种利用左右脑电波非对称性通过神经生物反馈改善病情的方法和系统,incoPat
+14,5,US4955388A,1987.0,US,True,Electroencephalographic attention monitor,脑电图注意力监视器,incoPat
+14,6,US4794533A,,US,False,,,
+14,7,US4579125A,1984.0,US,True,Real-time EEG spectral analyzer,实时脑电频谱分析仪,incoPat
+14,8,US4493327A,1982.0,US,True,Automatic evoked potential detection,诱发电位自动检测,incoPat
+14,9,US3901215A,1973.0,US,True,METHOD OF TESTING THE SENSES AND COGNITION OF SUBJECTS,测试受试者的感觉和认知的方法,incoPat
+14,10,US3498287A,,US,False,,,
+15,1,US6671543B1,,US,False,,,
+15,2,US6496724B1,1999.0,US,True,Method for the quantification of human alertness,对人的警觉性进行量化的方法,incoPat
+15,3,US6001065A,1996.0,US,True,Method and apparatus for measuring and analyzing physiological signals for active or passive control of physical and virtual spaces and the contents t,用于测量和分析生理信号以主动或被动控制物理和虚拟空间及其内容的方法和装置,BCI
+15,4,US5638826A,1995.0,US,True,Communication method and system using brain waves for multidimensional control,使用脑电波进行多维控制的通信方法和系统,BCI
+15,5,US5474082A,1993.0,US,True,Brain-body actuated system,脑-体驱动系统,BCI
+15,6,US4974602A,1989.0,US,True,Arrangement for analyzing local bioelectric currents in biological tissue complexes,用于分析生物组织复合物中局部生物电流的装置,incoPat
+15,7,US4800895A,1986.0,US,True,Electroencephalographic data display method and system,脑电图数据显示方法及系统,incoPat
+15,8,US4579125A,1984.0,US,True,Real-time EEG spectral analyzer,实时脑电频谱分析仪,incoPat
+15,9,US4417591A,,US,False,,,
+15,10,US4213465A,1978.0,US,True,Electroencephalograph,脑电图仪,incoPat
+15,11,US4084583A,,US,False,,,
+15,12,US2549836A,1946.0,US,True,Electrode-carrying headgear for electroencephalographic analysis,脑电图分析用电极携带头盔,incoPat
+15,13,US2426958A,,US,False,,,
+16,1,US12232905B2,,US,False,,,
+16,2,US6317627B1,1999.0,US,True,Anesthesia monitoring system based on electroencephalographic signals,基于脑电信号的麻醉监测系统,incoPat
+16,3,US5813993A,1996.0,US,True,Alertness and drowsiness detection and tracking system,警觉性和嗜睡检测与跟踪系统,incoPat
+16,4,US5447166A,1994.0,US,True,Neurocognitive adaptive computer interface method and system based on on-line measurement of the user's mental effort,一种基于用户心理努力在线测量的神经认知自适应计算机接口方法及系统,incoPat
+16,5,US4913160A,1988.0,US,True,Electroencephalographic system and method using factor structure of the evoked potentials,使用诱发电位因子结构的脑电图系统和方法,incoPat
+16,6,US4705049A,1986.0,US,True,Intraoperative monitoring or EP evaluation system utilizing an automatic adaptive self-optimizing digital comb filter,使用自动自适应自优化数字梳状滤波器的术中监测或EP评估系统,incoPat
+16,7,US4603703A,1984.0,US,True,Method for real-time detection and identification of neuroelectric signals,一种神经电信号的实时检测与识别方法,incoPat
+16,8,US4416288A,,US,False,,,
+16,9,US4201224A,1978.0,US,True,Electroencephalographic method and system for the quantitative description of patient brain states,用于定量描述患者脑状态的脑电图方法和系统,incoPat
+16,10,US3901215A,1973.0,US,True,METHOD OF TESTING THE SENSES AND COGNITION OF SUBJECTS,测试受试者的感觉和认知的方法,incoPat
+16,11,US3032029A,,US,False,,,
+17,1,US11647999B1,,US,False,,,
+17,2,US5938688A,1997.0,US,True,Deep brain stimulation method,一种深部脑刺激方法,incoPat
+17,3,US5611350A,1996.0,US,True,Method and apparatus for facilitating recovery of patients in deep coma,促进深度昏迷患者恢复的方法和装置,incoPat
+17,4,US5495853A,1994.0,US,True,System for evoking electroencephalogram signals,诱发脑电图信号系统,incoPat
+17,5,US5356368A,1991.0,US,True,Method of and apparatus for inducing desired states of consciousness,诱导所需意识状态的方法和装置,incoPat
+17,6,US5036858A,1990.0,US,True,Method and apparatus for changing brain wave frequency,一种改变脑波频率的方法及装置,incoPat
+17,7,US4883067A,1987.0,US,True,Method and apparatus for translating the EEG into music to induce and control various psychological and physiological states and to control a musical ,用于将EEG转换成音乐以诱导和控制各种心理和生理状态并控制乐器的方法和装置,incoPat
+17,8,US4462411A,1982.0,US,True,Evoked response audiometer,诱发反应听力计,incoPat
+17,9,US4275744A,1979.0,US,True,Auditory response detection method and apparatus,一种听觉响应检测方法及装置,incoPat
+17,10,US4092981A,1976.0,US,True,Method and apparatus for brain waveform examination,一种脑波检测方法及装置,incoPat
+17,11,US3978847A,1974.0,US,True,Multiple channel phase integrating biofeedback computing method,多通道相位积分生物反馈计算方法,incoPat
+17,12,US3821949A,1972.0,US,True,BIO-FEEDBACK APPARATUS,生物反馈装置,incoPat
+17,13,US3123768A,,US,False,,,
+18,1,US6966778B2,,US,False,,,
+18,2,US6364845B1,1999.0,US,True,Methods for diagnosing visuospatial disorientation or assessing visuospatial orientation capacity,用于诊断视觉空间定向障碍或评估视觉空间定向能力的方法,incoPat
+18,3,US5983129A,1998.0,US,True,Method for determining an individual's intensity of focused attention and integrating same into computer program,用于确定个人集中注意力的强度并将其集成到计算机程序中的方法,incoPat
+18,4,US5450855A,1994.0,US,True,Method and system for modification of condition with neural biofeedback using left-right brain wave asymmetry,一种利用左右脑电波非对称性通过神经生物反馈改善病情的方法和系统,incoPat
+18,5,US5299118A,1991.0,US,True,Method and system for analysis of long term physiological polygraphic recordings,用于分析长期生理多导记录的方法和系统,incoPat
+18,6,US5047930A,1987.0,US,True,Method and system for analysis of long term physiological polygraphic recordings,用于分析长期生理多导记录的方法和系统,incoPat
+18,7,US4776345A,1987.0,US,True,Interactive determination of sleep stages,睡眠阶段的交互式确定,incoPat
+18,8,US4610259A,1983.0,US,True,EEG signal analysis system,脑电信号分析系统,incoPat
+18,9,US4493327A,1982.0,US,True,Automatic evoked potential detection,诱发电位自动检测,incoPat
+18,10,US4214591A,1978.0,US,True,Brain wave analyzing system and method,脑电波分析系统及方法,incoPat
+18,11,US3623477A,,US,False,,,
+19,1,WO03085546A1,,WO,False,,,
+19,2,US6230049B1,1999.0,US,True,Integrated system for EEG monitoring and electrical stimulation with a multiplicity of electrodes,具有多个电极的用于EEG监测和电刺激的集成系统,incoPat
+19,3,US5857978A,1996.0,US,True,Epileptic seizure prediction by non-linear methods,利用非线性方法预测癫痫发作,incoPat
+19,4,US5392788A,1993.0,US,True,Method and device for interpreting concepts and conceptual thought from brainwave data and for assisting for diagnosis of brainwave disfunction,一种从脑波数据解释概念和概念思维并辅助诊断脑波功能障碍的方法和装置,incoPat
+19,5,US4926969A,1988.0,US,True,Sensory-driven controller,传感器驱动控制器,incoPat
+19,6,US4697598A,,US,False,,,
+19,7,US4417592A,1981.0,US,True,Digital electroencephalographic instrument and method,数字脑电图仪及方法,incoPat
+19,8,US4171696A,1978.0,US,True,Prevention of distortion of brainwave data due to eye movement or other artifacts,防止由于眼球运动或其他伪影引起的脑波数据失真,incoPat
+19,9,US3656474A,,US,False,,,
+20,1,US8062129B2,,US,False,,,
+20,2,US6496724B1,1999.0,US,True,Method for the quantification of human alertness,对人的警觉性进行量化的方法,incoPat
+20,3,US5626145A,1996.0,US,True,Method and apparatus for extraction of low-frequency artifacts from brain waves for alertness detection,用于从用于警觉性检测的脑电波中提取低频伪影的方法和装置,incoPat
+20,4,US5392788A,1993.0,US,True,Method and device for interpreting concepts and conceptual thought from brainwave data and for assisting for diagnosis of brainwave disfunction,一种从脑波数据解释概念和概念思维并辅助诊断脑波功能障碍的方法和装置,incoPat
+20,5,US5003986A,,US,False,,,
+20,6,US4610259A,1983.0,US,True,EEG signal analysis system,脑电信号分析系统,incoPat
+20,7,US4411273A,1978.0,US,True,System and method for electrode pair derivations in electroencephalography,用于脑电描记术中电极对推导的系统和方法,incoPat
+20,8,US4037586A,1976.0,US,True,Electroencephalograph display,脑电图显示,incoPat
+20,9,US2933364A,,US,False,,,
+21,1,US7764989B2,,US,False,,,
+21,2,US6549804B1,1999.0,US,True,"System for the prediction,  rapid detection,  warning,  prevention or control of changes in activity states in the brain of a subject",用于预测，快速检测，警告，预防或控制受试者大脑中活动状态变化的系统,incoPat
+21,3,US6304775B1,1999.0,US,True,Seizure warning and prediction,癫痫发作警告和预测,incoPat
+21,4,US5995868A,1997.0,US,True,"System for the prediction,  rapid detection,  warning,  prevention,  or control of changes in activity states in the brain of a subject",用于预测，快速检测，警告，预防或控制受试者大脑中活动状态变化的系统,incoPat
+21,5,US5626627A,1995.0,US,True,Electroconvulsive therapy method using ICTAL EEG data as an indicator of ECT seizure adequacy,以ICTAL EEG数据作为ECT癫痫发作充分性指标的电休克治疗方法,incoPat
+21,6,US4873981A,1988.0,US,True,Electroconvulsive therapy apparatus and method for automatic monitoring of patient seizures,用于自动监测患者癫痫发作电惊厥治疗设备和方法,incoPat
+21,7,US4503863A,,US,False,,,
+21,8,US3967616A,1974.0,US,True,Multichannel system for and a multifactorial method of controlling the nervous system of a living organism,多通道系统和控制生物神经系统的多因素方法,incoPat
+21,9,US3837331A,1972.0,US,True,SYSTEM AND METHOD FOR CONTROLLING THE NERVOUS SYSTEM OF A LIVING ORGANISM,用于控制活生物体神经系统的系统和方法,incoPat
+21,10,US2501808A,,US,False,,,
+22,1,US7239919B2,,US,False,,,
+22,2,US6115631A,1998.0,US,True,Apparatus and method for predicting probability of ruminating behavior in people,一种预测人反刍动物反刍动物行为概率的装置及方法,incoPat
+22,3,US5983129A,1998.0,US,True,Method for determining an individual's intensity of focused attention and integrating same into computer program,用于确定个人集中注意力的强度并将其集成到计算机程序中的方法,incoPat
+22,4,US5762611A,,US,False,,,
+22,5,US5460184A,1993.0,US,True,Mental-concentration measuring method and apparatus,一种精神集中度测量方法及装置,incoPat
+22,6,US4955388A,1987.0,US,True,Electroencephalographic attention monitor,脑电图注意力监视器,incoPat
+22,7,US4610259A,1983.0,US,True,EEG signal analysis system,脑电信号分析系统,incoPat
+22,8,US4408616A,1981.0,US,True,Brain electricaL activity mapping,脑电地形图,incoPat
+22,9,US3901215A,1973.0,US,True,METHOD OF TESTING THE SENSES AND COGNITION OF SUBJECTS,测试受试者的感觉和认知的方法,incoPat
+22,10,US3574450A,,US,False,,,
+23,1,US12329589B2,,US,False,,,
+23,2,WO0025668A1,1999.0,WO,True,SYSTEM AND METHOD FOR LONG-TERM RECORDING OF NEURAL ACTIVITY,系统和方法用于长-术语记录的神经活性,incoPat
+23,3,US6011991A,1998.0,US,True,Communication system and method including brain wave analysis and/or use of brain activity,包括脑电波分析和/或使用脑活动的通信系统和方法,incoPat
+23,4,US5816247A,1996.0,US,True,Monitoring an EEG,监测脑电图,incoPat
+23,5,US5392788A,1993.0,US,True,Method and device for interpreting concepts and conceptual thought from brainwave data and for assisting for diagnosis of brainwave disfunction,一种从脑波数据解释概念和概念思维并辅助诊断脑波功能障碍的方法和装置,incoPat
+23,6,US5003986A,,US,False,,,
+23,7,US4736307A,1986.0,US,True,Microcomputer-based system for the on-line analysis and topographic display of human brain electrical activity,人脑电活动的微机在线分析与地形图显示系统,incoPat
+23,8,US4498080A,1983.0,US,True,Apparatus and method for topographic display of multichannel data,用于多通道数据地形显示的装置和方法,incoPat
+23,9,US4213465A,1978.0,US,True,Electroencephalograph,脑电图仪,incoPat
+23,10,US3696808A,1970.0,US,True,METHOD AND SYSTEM FOR BRAIN WAVE ANALYSIS,一种脑波分析方法及系统,incoPat
+23,11,US3286176A,,US,False,,,
+24,1,US20040220493A1,,US,False,,,
+24,2,US6496724B1,1999.0,US,True,Method for the quantification of human alertness,对人的警觉性进行量化的方法,incoPat
+24,3,US5729205A,1997.0,US,True,Automatic transmission system of an emergency signal and a method thereof using a driver's brain wave,紧急信号自动传输系统及其使用驾驶员脑电波的方法,incoPat
+24,4,US5649061A,1995.0,US,True,Device and method for estimating a mental decision,用于估计心理决策的设备和方法,BCI
+24,5,US5218530A,1989.0,US,True,"Method of displaying and analyzing nonlinear,  dynamic brain signals",一种显示和分析非线性动态脑信号的方法,incoPat
+24,6,US4744029A,,US,False,,,
+24,7,US4408616A,1981.0,US,True,Brain electricaL activity mapping,脑电地形图,incoPat
+24,8,US3837331A,1972.0,US,True,SYSTEM AND METHOD FOR CONTROLLING THE NERVOUS SYSTEM OF A LIVING ORGANISM,用于控制活生物体神经系统的系统和方法,incoPat
+24,9,US3753433A,1971.0,US,True,ELECTROENCEPHALOPHONE AND FEEDBACK SYSTEM,脑电检波器和反馈系统,incoPat
+24,10,US3032029A,,US,False,,,
+25,1,US20100286551A1,,US,False,,,
+25,2,US6254536B1,1998.0,US,True,Method and apparatus for measuring and analyzing physiological signals for active or passive control of physical and virtual spaces and the contents t,用于测量和分析生理信号以主动或被动控制物理和虚拟空间及其内容的方法和装置,BCI
+25,3,US5649061A,1995.0,US,True,Device and method for estimating a mental decision,用于估计心理决策的设备和方法,BCI
+25,4,US5447166A,1994.0,US,True,Neurocognitive adaptive computer interface method and system based on on-line measurement of the user's mental effort,一种基于用户心理努力在线测量的神经认知自适应计算机接口方法及系统,incoPat
+25,5,US4987903A,1988.0,US,True,Method and apparatus for identifying and alleviating semantic memory deficiencies,用于识别和减轻语义记忆缺陷的方法和装置,incoPat
+25,6,US4794533A,,US,False,,,
+25,7,US4412547A,1981.0,US,True,Neurological monitoring device,神经学监测装置,incoPat
+25,8,US4037586A,1976.0,US,True,Electroencephalograph display,脑电图显示,incoPat
+25,9,US2712309A,,US,False,,,
+26,1,US7202793B2,,US,False,,,
+26,2,US6496724B1,1999.0,US,True,Method for the quantification of human alertness,对人的警觉性进行量化的方法,incoPat
+26,3,US5762611A,,US,False,,,
+26,4,US5363858A,1993.0,US,True,Method and apparatus for multifaceted electroencephalographic response analysis (MERA),用于多面脑电图响应分析(MERA)的方法和装置,incoPat
+26,5,US5170780A,1991.0,US,True,Method of credibility assessment based on feedback-elicited P3 responses of brain,基于脑P3反馈反应的可信度评估方法,incoPat
+26,6,US4932416A,1987.0,US,True,"Method for the analysis,  display and classification of event related potentials by interpretation of P3 responses",通过解释P3反应分析、显示和分类事件相关电位的方法,incoPat
+26,7,US4649482A,1984.0,US,True,Brain electrical activity topographical mapping,脑电地形图,incoPat
+26,8,US4421122A,1981.0,US,True,Brain electrical activity mapping,脑电地形图,incoPat
+26,9,US4171696A,1978.0,US,True,Prevention of distortion of brainwave data due to eye movement or other artifacts,防止由于眼球运动或其他伪影引起的脑波数据失真,incoPat
+26,10,US3837331A,1972.0,US,True,SYSTEM AND METHOD FOR CONTROLLING THE NERVOUS SYSTEM OF A LIVING ORGANISM,用于控制活生物体神经系统的系统和方法,incoPat
+26,11,US3495596A,,US,False,,,
+27,1,US8326417B2,,US,False,,,
+27,2,US6230049B1,1999.0,US,True,Integrated system for EEG monitoring and electrical stimulation with a multiplicity of electrodes,具有多个电极的用于EEG监测和电刺激的集成系统,incoPat
+27,3,US5730146A,1994.0,US,True,"Transmitting,  analyzing and reporting EEG data",传输、分析和报告EEG数据,incoPat
+27,4,US4744029A,,US,False,,,
+27,5,US4201224A,1978.0,US,True,Electroencephalographic method and system for the quantitative description of patient brain states,用于定量描述患者脑状态的脑电图方法和系统,incoPat
+27,6,US3893450A,1973.0,US,True,METHOD AND APPARATUS FOR BRAIN WAVEFORM EXAMINATION,一种脑波检测方法及装置,incoPat
+27,7,US3498287A,,US,False,,,
+28,1,US8326417B2,,US,False,,,
+28,2,US6128538A,1999.0,US,True,Means and method for the treatment of neurological disorders,用于治疗神经障碍的装置和方法,incoPat
+28,3,US6016449A,1997.0,US,True,System for treatment of neurological disorders,神经系统疾病治疗系统,incoPat
+28,4,US5269302A,1992.0,US,True,Electroconvulsive therapy apparatus and method for monitoring patient seizures,用于监测患者癫痫发作电惊厥治疗设备和方法,incoPat
+28,5,US4878498A,1989.0,US,True,Electroconvulsive therapy apparatus and method for automatic monitoring of patient seizures,用于自动监测患者癫痫发作电惊厥治疗设备和方法,incoPat
+28,6,US4503863A,,US,False,,,
+28,7,US3893450A,1973.0,US,True,METHOD AND APPARATUS FOR BRAIN WAVEFORM EXAMINATION,一种脑波检测方法及装置,incoPat
+28,8,US3087487A,,US,False,,,
+29,1,US8209019B2,,US,False,,,
+29,2,US6549804B1,1999.0,US,True,"System for the prediction,  rapid detection,  warning,  prevention or control of changes in activity states in the brain of a subject",用于预测，快速检测，警告，预防或控制受试者大脑中活动状态变化的系统,incoPat
+29,3,US5813993A,1996.0,US,True,Alertness and drowsiness detection and tracking system,警觉性和嗜睡检测与跟踪系统,incoPat
+29,4,US5311877A,1992.0,US,True,Waking degree maintaining apparatus,清醒度保持装置,incoPat
+29,5,US4883067A,1987.0,US,True,Method and apparatus for translating the EEG into music to induce and control various psychological and physiological states and to control a musical ,用于将EEG转换成音乐以诱导和控制各种心理和生理状态并控制乐器的方法和装置,incoPat
+29,6,US4493327A,1982.0,US,True,Automatic evoked potential detection,诱发电位自动检测,incoPat
+29,7,US4275744A,1979.0,US,True,Auditory response detection method and apparatus,一种听觉响应检测方法及装置,incoPat
+29,8,US3498287A,,US,False,,,
+30,1,US7146211B2,,US,False,,,
+30,2,US6230049B1,1999.0,US,True,Integrated system for EEG monitoring and electrical stimulation with a multiplicity of electrodes,具有多个电极的用于EEG监测和电刺激的集成系统,incoPat
+30,3,US5857978A,1996.0,US,True,Epileptic seizure prediction by non-linear methods,利用非线性方法预测癫痫发作,incoPat
+30,4,US5349962A,1993.0,US,True,Method and apparatus for detecting epileptic seizures,用于检测癫痫发作的方法和装置,incoPat
+30,5,US3993046A,1974.0,US,True,Seizure suppression device,癫痫抑制装置,incoPat
+30,6,US3837331A,1972.0,US,True,SYSTEM AND METHOD FOR CONTROLLING THE NERVOUS SYSTEM OF A LIVING ORGANISM,用于控制活生物体神经系统的系统和方法,incoPat
+30,7,US3413546A,,US,False,,,

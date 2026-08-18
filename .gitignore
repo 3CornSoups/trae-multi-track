@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.python-version
+
+# 大文件与缓存
+*.npy
+*.graphml
+*.xlsx
+*.zip
+matching_scores.csv
+prefilter_candidates.csv
+semantic_scores.jsonl
+edges.csv
+
+# 系统
+Thumbs.db
+.DS_Store

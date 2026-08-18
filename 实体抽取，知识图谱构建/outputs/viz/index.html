@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh"><head><meta charset="utf-8"><title>BCI 专利知识图谱可视化</title>
+<style>
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#f9f9f7;color:#0b0b0b;
+  max-width:760px;margin:0 auto;padding:48px 24px}
+@media (prefers-color-scheme:dark){body{background:#0d0d0d;color:#fff}}
+h1{font-size:20px} p{color:#52514e;font-size:13.5px;line-height:1.7}
+@media (prefers-color-scheme:dark){p{color:#c3c2b7}}
+a.card{display:block;border:1px solid rgba(11,11,11,.12);border-radius:12px;padding:16px 18px;
+  margin:14px 0;text-decoration:none;color:inherit;background:#fcfcfb}
+@media (prefers-color-scheme:dark){a.card{background:#1a1a19;border-color:rgba(255,255,255,.12)}}
+a.card b{font-size:15px} a.card span{display:block;margin-top:4px;font-size:12.5px;color:#898781}
+</style></head><body>
+<h1>BCI 专利知识图谱可视化</h1>
+<p>数据：2863 个 BCI 专利 · 23029 节点 · 51193 关系（实体消歧 + IPC 大组级主题细化后）</p>
+<a class="card" href="01_topic_distribution.html"><b>① 技术主题分布</b>
+  <span>147 个 IPC 大组级主题的专利数量分布（Top 25 + 折叠）</span></a>
+<a class="card" href="02_signal_method_network.html"><b>② 信号-方法共现网络</b>
+  <span>生物信号类型 × 技术方法的共现结构（悬停高亮）</span></a>
+<a class="card" href="03_graph_full.graphml"><b>③ 全图 GraphML</b>
+  <span>23029 节点 / 51193 边完整图数据，用 Gephi 打开做网络分析</span></a>
+</body></html>

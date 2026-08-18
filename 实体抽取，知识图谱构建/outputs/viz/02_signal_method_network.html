@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh"><head><meta charset="utf-8"><title>BCI 信号-方法共现网络</title>
+<style>
+:root{color-scheme:light;--surface-1:#fcfcfb;--page:#f9f9f7;--ink-1:#0b0b0b;--ink-2:#52514e;
+--muted:#898781;--grid:#e1e0d9;--axis:#c3c2b7;--border:rgba(11,11,11,.10)}
+.viz-root{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;
+  max-width:960px;margin:0 auto;padding:24px 20px 48px}
+body{margin:0;background:var(--page)}
+@media (prefers-color-scheme:dark){
+  :root:where(:not([data-theme="light"])){color-scheme:dark;--surface-1:#1a1a19;--page:#0d0d0d;--ink-1:#ffffff;--ink-2:#c3c2b7;
+--muted:#898781;--grid:#2c2c2a;--axis:#383835;--border:rgba(255,255,255,.10)}
+}
+:root[data-theme="dark"]{color-scheme:dark;--surface-1:#1a1a19;--page:#0d0d0d;--ink-1:#ffffff;--ink-2:#c3c2b7;
+--muted:#898781;--grid:#2c2c2a;--axis:#383835;--border:rgba(255,255,255,.10)}
+h1{font-size:17px;color:var(--ink-1);font-weight:650;margin:0 0 4px}
+.sub{font-size:12.5px;color:var(--ink-2);margin:0 0 12px}
+svg{display:block;margin:0 auto;background:var(--surface-1);border:1px solid var(--border);
+  border-radius:10px;max-width:100%;height:auto}
+.nlabel{font-size:10px;fill:var(--ink-2);pointer-events:none;
+  paint-order:stroke;stroke:var(--surface-1);stroke-width:2.5px}
+.nd circle{cursor:pointer;transition:filter .12s}
+.nd:hover circle{filter:brightness(1.12)}
+.nd{opacity:.92}
+.nd.dim{opacity:.22}
+.legend{display:flex;gap:18px;align-items:center;margin-top:12px;flex-wrap:wrap;
+  font-size:12px;color:var(--ink-1)}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}
+.note2{color:var(--muted);font-size:11px}
+#tip{position:fixed;pointer-events:none;background:var(--ink-1);color:var(--surface-1);
+  font-size:12px;padding:6px 10px;border-radius:6px;opacity:0;transition:opacity .1s;z-index:9;
+  max-width:260px}
+</style></head><body><div class="viz-root">
+<h1>BCI 核心技术网络：生物信号类型 ↔ 技术方法</h1>
+<p class="sub">技术方法—处理→生物信号类型 · Top 25 方法 × Top 12 信号 · 消歧后
+（如 "脑电信号" 已合并 EEG/脑电图等 25 种写法）· 悬停节点查看详情与高亮邻居</p>
+<svg viewBox="0 0 1320 920" width="1320" height="920">
+<line x1="738.6" y1="497.2" x2="661.0" y2="627.7" data-s="技术方法:测量脑电图信号" data-t="生物信号类型:脑电图信号" stroke="#898781" stroke-opacity="0.80" stroke-width="2.80"/><line x1="669.8" y1="494.2" x2="599.4" y2="517.0" data-s="技术方法:特征提取" data-t="生物信号类型:脑电信号" stroke="#898781" stroke-opacity="0.70" stroke-width="2.45"/><line x1="609.9" y1="585.5" x2="599.4" y2="517.0" data-s="技术方法:采集脑电信号" data-t="生物信号类型:脑电信号" stroke="#898781" stroke-opacity="0.68" stroke-width="2.36"/><line x1="675.0" y1="693.7" x2="599.4" y2="517.0" data-s="技术方法:脑电信号采集" data-t="生物信号类型:脑电信号" stroke="#898781" stroke-opacity="0.63" stroke-width="2.18"/><line x1="730.3" y1="444.4" x2="599.4" y2="517.0" data-s="技术方法:预处理" data-t="生物信号类型:脑电信号" stroke="#898781" stroke-opacity="0.60" stroke-width="2.10"/><line x1="98.8" y1="60.0" x2="533.9" y2="464.6" data-s="技术方法:接收神经信号" data-t="生物信号类型:神经信号" stroke="#898781" stroke-opacity="0.53" stroke-width="1.83"/><line x1="905.6" y1="214.5" x2="633.8" y2="455.4" data-s="技术方法:检测电生理信号" data-t="生物信号类型:脑信号" stroke="#898781" stroke-opacity="0.38" stroke-width="1.30"/><line x1="1130.0" y1="708.0" x2="645.4" y2="574.7" data-s="技术方法:识别神经生理事件" data-t="生物信号类型:EEG" stroke="#898781" stroke-opacity="0.38" stroke-width="1.30"/><line x1="734.7" y1="541.4" x2="533.9" y2="464.6" data-s="技术方法:应用权重" data-t="生物信号类型:神经信号" stroke="#898781" stroke-opacity="0.38" stroke-width="1.30"/><line x1="823.3" y1="535.2" x2="599.4" y2="517.0" data-s="技术方法:信号处理" data-t="生物信号类型:脑电信号" stroke="#898781" stroke-opacity="0.35" stroke-width="1.22"/><line x1="694.8" y1="840.0" x2="533.9" y2="464.6" data-s="技术方法:神经响应测量" data-t="生物信号类型:神经信号" stroke="#898781" stroke-opacity="0.35" stroke-width="1.22"/><line x1="694.8" y1="840.0" x2="556.4" y2="620.2" data-s="技术方法:神经响应测量" data-t="生物信号类型:脑电图(EEG)" stroke="#898781" stroke-opacity="0.33" stroke-width="1.13"/><line x1="429.1" y1="830.7" x2="556.4" y2="620.2" data-s="技术方法:数据清理" data-t="生物信号类型:脑电图(EEG)" stroke="#898781" stroke-opacity="0.33" stroke-width="1.13"/><line x1="669.8" y1="494.2" x2="661.0" y2="627.7" data-s="技术方法:特征提取" data-t="生物信号类型:脑电图信号" stroke="#898781" stroke-opacity="0.33" stroke-width="1.13"/><line x1="823.3" y1="535.2" x2="645.4" y2="574.7" data-s="技术方法:信号处理" data-t="生物信号类型:EEG" stroke="#898781" stroke-opacity="0.33" stroke-width="1.13"/><line x1="436.2" y1="588.7" x2="80.0" y2="574.4" data-s="技术方法:测量神经响应" data-t="生物信号类型:神经响应" stroke="#898781" stroke-opacity="0.33" stroke-width="1.13"/><line x1="730.3" y1="444.4" x2="661.0" y2="627.7" data-s="技术方法:预处理" data-t="生物信号类型:脑电图信号" stroke="#898781" stroke-opacity="0.30" stroke-width="1.04"/><line x1="646.3" y1="537.3" x2="556.4" y2="620.2" data-s="技术方法:数据收集" data-t="生物信号类型:脑电图(EEG)" stroke="#898781" stroke-opacity="0.30" stroke-width="1.04"/><line x1="669.8" y1="494.2" x2="645.4" y2="574.7" data-s="技术方法:特征提取" data-t="生物信号类型:EEG" stroke="#898781" stroke-opacity="0.30" stroke-width="1.04"/><line x1="730.3" y1="444.4" x2="645.4" y2="574.7" data-s="技术方法:预处理" data-t="生物信号类型:EEG" stroke="#898781" stroke-opacity="0.30" stroke-width="1.04"/><line x1="823.3" y1="535.2" x2="556.4" y2="620.2" data-s="技术方法:信号处理" data-t="生物信号类型:脑电图(EEG)" stroke="#898781" stroke-opacity="0.28" stroke-width="0.95"/><line x1="364.0" y1="704.0" x2="556.4" y2="620.2" data-s="技术方法:分析神经响应数据" data-t="生物信号类型:脑电图(EEG)" stroke="#898781" stroke-opacity="0.28" stroke-width="0.95"/><line x1="699.4" y1="576.3" x2="599.4" y2="517.0" data-s="技术方法:信号采集" data-t="生物信号类型:脑电信号" stroke="#898781" stroke-opacity="0.28" stroke-width="0.95"/><line x1="745.6" y1="640.5" x2="556.4" y2="620.2" data-s="技术方法:分析" data-t="生物信号类型:脑电图(EEG)" stroke="#898781" stroke-opacity="0.25" stroke-width="0.86"/><line x1="443.8" y1="521.9" x2="645.4" y2="574.7" data-s="技术方法:获取生物信号" data-t="生物信号类型:EEG" stroke="#898781" stroke-opacity="0.25" stroke-width="0.86"/><line x1="436.2" y1="588.7" x2="533.9" y2="464.6" data-s="技术方法:测量神经响应" data-t="生物信号类型:神经信号" stroke="#898781" stroke-opacity="0.25" stroke-width="0.86"/><line x1="699.4" y1="576.3" x2="661.0" y2="627.7" data-s="技术方法:信号采集" data-t="生物信号类型:脑电图信号" stroke="#898781" stroke-opacity="0.25" stroke-width="0.86"/><line x1="609.1" y1="605.1" x2="599.4" y2="517.0" data-s="技术方法:滤波" data-t="生物信号类型:脑电信号" stroke="#898781" stroke-opacity="0.25" stroke-width="0.86"/><line x1="675.0" y1="693.7" x2="605.3" y2="631.4" data-s="技术方法:脑电信号采集" data-t="生物信号类型:脑电波" stroke="#898781" stroke-opacity="0.23" stroke-width="0.78"/><line x1="646.3" y1="537.3" x2="633.8" y2="455.4" data-s="技术方法:数据收集" data-t="生物信号类型:脑信号" stroke="#898781" stroke-opacity="0.23" stroke-width="0.78"/><line x1="730.3" y1="444.4" x2="633.8" y2="455.4" data-s="技术方法:预处理" data-t="生物信号类型:脑信号" stroke="#898781" stroke-opacity="0.23" stroke-width="0.78"/><line x1="669.8" y1="494.2" x2="633.8" y2="455.4" data-s="技术方法:特征提取" data-t="生物信号类型:脑信号" stroke="#898781" stroke-opacity="0.23" stroke-width="0.78"/><line x1="734.7" y1="541.4" x2="661.0" y2="627.7" data-s="技术方法:应用权重" data-t="生物信号类型:脑电图信号" stroke="#898781" stroke-opacity="0.23" stroke-width="0.78"/><line x1="436.2" y1="588.7" x2="556.4" y2="620.2" data-s="技术方法:测量神经响应" data-t="生物信号类型:脑电图(EEG)" stroke="#898781" stroke-opacity="0.23" stroke-width="0.78"/><line x1="669.8" y1="494.2" x2="533.9" y2="464.6" data-s="技术方法:特征提取" data-t="生物信号类型:神经信号" stroke="#898781" stroke-opacity="0.23" stroke-width="0.78"/><line x1="823.3" y1="535.2" x2="696.5" y2="520.4" data-s="技术方法:信号处理" data-t="生物信号类型:EEG信号" stroke="#898781" stroke-opacity="0.23" stroke-width="0.78"/><line x1="609.9" y1="585.5" x2="696.5" y2="520.4" data-s="技术方法:采集脑电信号" data-t="生物信号类型:EEG信号" stroke="#898781" stroke-opacity="0.23" stroke-width="0.78"/><line x1="745.6" y1="640.5" x2="645.4" y2="574.7" data-s="技术方法:分析" data-t="生物信号类型:EEG" stroke="#898781" stroke-opacity="0.23" stroke-width="0.78"/><line x1="672.1" y1="603.7" x2="556.4" y2="620.2" data-s="技术方法:快速傅里叶变换" data-t="生物信号类型:脑电图(EEG)" stroke="#898781" stroke-opacity="0.23" stroke-width="0.78"/><line x1="669.8" y1="494.2" x2="743.9" y2="576.6" data-s="技术方法:特征提取" data-t="生物信号类型:脑电图" stroke="#898781" stroke-opacity="0.23" stroke-width="0.78"/><line x1="675.0" y1="693.7" x2="661.0" y2="627.7" data-s="技术方法:脑电信号采集" data-t="生物信号类型:脑电图信号" stroke="#898781" stroke-opacity="0.23" stroke-width="0.78"/><line x1="609.1" y1="605.1" x2="743.9" y2="576.6" data-s="技术方法:滤波" data-t="生物信号类型:脑电图" stroke="#898781" stroke-opacity="0.23" stroke-width="0.78"/><line x1="745.6" y1="640.5" x2="661.0" y2="627.7" data-s="技术方法:分析" data-t="生物信号类型:脑电图信号" stroke="#898781" stroke-opacity="0.23" stroke-width="0.78"/><line x1="730.3" y1="444.4" x2="696.5" y2="520.4" data-s="技术方法:预处理" data-t="生物信号类型:EEG信号" stroke="#898781" stroke-opacity="0.23" stroke-width="0.78"/><line x1="823.3" y1="535.2" x2="743.9" y2="576.6" data-s="技术方法:信号处理" data-t="生物信号类型:脑电图" stroke="#898781" stroke-opacity="0.23" stroke-width="0.78"/><line x1="609.1" y1="605.1" x2="605.3" y2="631.4" data-s="技术方法:滤波" data-t="生物信号类型:脑电波" stroke="#898781" stroke-opacity="0.20" stroke-width="0.69"/><line x1="823.3" y1="535.2" x2="878.0" y2="530.0" data-s="技术方法:信号处理" data-t="生物信号类型:神经活动" stroke="#898781" stroke-opacity="0.20" stroke-width="0.69"/><line x1="738.6" y1="497.2" x2="696.5" y2="520.4" data-s="技术方法:测量脑电图信号" data-t="生物信号类型:EEG信号" stroke="#898781" stroke-opacity="0.20" stroke-width="0.69"/><line x1="609.1" y1="605.1" x2="549.2" y2="593.2" data-s="技术方法:滤波" data-t="生物信号类型:电信号" stroke="#898781" stroke-opacity="0.20" stroke-width="0.69"/><line x1="609.9" y1="585.5" x2="605.3" y2="631.4" data-s="技术方法:采集脑电信号" data-t="生物信号类型:脑电波" stroke="#898781" stroke-opacity="0.20" stroke-width="0.69"/><line x1="699.4" y1="576.3" x2="645.4" y2="574.7" data-s="技术方法:信号采集" data-t="生物信号类型:EEG" stroke="#898781" stroke-opacity="0.20" stroke-width="0.69"/><line x1="646.3" y1="537.3" x2="696.5" y2="520.4" data-s="技术方法:数据收集" data-t="生物信号类型:EEG信号" stroke="#898781" stroke-opacity="0.20" stroke-width="0.69"/><line x1="579.3" y1="663.0" x2="605.3" y2="631.4" data-s="技术方法:心理生理信号处理" data-t="生物信号类型:脑电波" stroke="#898781" stroke-opacity="0.20" stroke-width="0.69"/><line x1="734.7" y1="541.4" x2="696.5" y2="520.4" data-s="技术方法:应用权重" data-t="生物信号类型:EEG信号" stroke="#898781" stroke-opacity="0.20" stroke-width="0.69"/><line x1="672.1" y1="603.7" x2="645.4" y2="574.7" data-s="技术方法:快速傅里叶变换" data-t="生物信号类型:EEG" stroke="#898781" stroke-opacity="0.20" stroke-width="0.69"/><line x1="609.9" y1="585.5" x2="645.4" y2="574.7" data-s="技术方法:采集脑电信号" data-t="生物信号类型:EEG" stroke="#898781" stroke-opacity="0.20" stroke-width="0.69"/><line x1="669.8" y1="494.2" x2="696.5" y2="520.4" data-s="技术方法:特征提取" data-t="生物信号类型:EEG信号" stroke="#898781" stroke-opacity="0.20" stroke-width="0.69"/><line x1="609.1" y1="605.1" x2="556.4" y2="620.2" data-s="技术方法:滤波" data-t="生物信号类型:脑电图(EEG)" stroke="#898781" stroke-opacity="0.20" stroke-width="0.69"/><line x1="609.1" y1="605.1" x2="661.0" y2="627.7" data-s="技术方法:滤波" data-t="生物信号类型:脑电图信号" stroke="#898781" stroke-opacity="0.20" stroke-width="0.69"/><line x1="646.3" y1="537.3" x2="645.4" y2="574.7" data-s="技术方法:数据收集" data-t="生物信号类型:EEG" stroke="#898781" stroke-opacity="0.20" stroke-width="0.69"/><line x1="609.1" y1="605.1" x2="645.4" y2="574.7" data-s="技术方法:滤波" data-t="生物信号类型:EEG" stroke="#898781" stroke-opacity="0.20" stroke-width="0.69"/><line x1="646.3" y1="537.3" x2="599.4" y2="517.0" data-s="技术方法:数据收集" data-t="生物信号类型:脑电信号" stroke="#898781" stroke-opacity="0.20" stroke-width="0.69"/><line x1="699.4" y1="576.3" x2="743.9" y2="576.6" data-s="技术方法:信号采集" data-t="生物信号类型:脑电图" stroke="#898781" stroke-opacity="0.20" stroke-width="0.69"/><line x1="672.1" y1="603.7" x2="661.0" y2="627.7" data-s="技术方法:快速傅里叶变换" data-t="生物信号类型:脑电图信号" stroke="#898781" stroke-opacity="0.20" stroke-width="0.69"/>
+<g class="nd" data-name="技术方法:预处理" data-kind="方法"
+     data-freq="64">
+  <circle cx="730.3" cy="444.4" r="45.0" fill="#eb6834" stroke="var(--surface-1)" stroke-width="1.5"/>
+  <text x="779.3" y="447.9" class="nlabel">技术方法:预处理</text>
+</g><g class="nd" data-name="技术方法:特征提取" data-kind="方法"
+     data-freq="63">
+  <circle cx="669.8" cy="494.2" r="44.7" fill="#eb6834" stroke="var(--surface-1)" stroke-width="1.5"/>
+  <text x="718.5" y="497.7" class="nlabel">技术方法:特征提取</text>
+</g><g class="nd" data-name="技术方法:神经响应测量" data-kind="方法"
+     data-freq="52">
+  <circle cx="694.8" cy="840.0" r="41.4" fill="#eb6834" stroke="var(--surface-1)" stroke-width="1.5"/>
+  <text x="740.2" y="843.5" class="nlabel">技术方法:神经响应测量</text>
+</g><g class="nd" data-name="技术方法:数据收集" data-kind="方法"
+     data-freq="43">
+  <circle cx="646.3" cy="537.3" r="38.5" fill="#eb6834" stroke="var(--surface-1)" stroke-width="1.5"/>
+  <text x="688.8" y="540.8" class="nlabel">技术方法:数据收集</text>
+</g><g class="nd" data-name="技术方法:信号处理" data-kind="方法"
+     data-freq="38">
+  <circle cx="823.3" cy="535.2" r="36.7" fill="#eb6834" stroke="var(--surface-1)" stroke-width="1.5"/>
+  <text x="864.0" y="538.7" class="nlabel">技术方法:信号处理</text>
+</g><g class="nd" data-name="技术方法:测量脑电图信号" data-kind="方法"
+     data-freq="28">
+  <circle cx="738.6" cy="497.2" r="32.8" fill="#eb6834" stroke="var(--surface-1)" stroke-width="1.5"/>
+  <text x="775.4" y="500.7" class="nlabel">技术方法:测量脑电图信号</text>
+</g><g class="nd" data-name="技术方法:构建候选特征提取的数据流" data-kind="方法"
+     data-freq="28">
+  <circle cx="649.5" cy="591.4" r="32.8" fill="#eb6834" stroke="var(--surface-1)" stroke-width="1.5"/>
+  <text x="686.3" y="594.9" class="nlabel">技术方法:构建候选特征提取的…</text>
+</g><g class="nd" data-name="技术方法:采集脑电信号" data-kind="方法"
+     data-freq="27">
+  <circle cx="609.9" cy="585.5" r="32.4" fill="#eb6834" stroke="var(--surface-1)" stroke-width="1.5"/>
+  <text x="646.3" y="589.0" class="nlabel">技术方法:采集脑电信号</text>
+</g><g class="nd" data-name="技术方法:分析神经响应数据" data-kind="方法"
+     data-freq="26">
+  <circle cx="364.0" cy="704.0" r="31.9" fill="#eb6834" stroke="var(--surface-1)" stroke-width="1.5"/>
+  <text x="399.9" y="707.5" class="nlabel">技术方法:分析神经响应数据</text>
+</g><g class="nd" data-name="技术方法:脑电信号采集" data-kind="方法"
+     data-freq="24">
+  <circle cx="675.0" cy="693.7" r="31.0" fill="#eb6834" stroke="var(--surface-1)" stroke-width="1.5"/>
+  <text x="710.0" y="697.2" class="nlabel">技术方法:脑电信号采集</text>
+</g><g class="nd" data-name="技术方法:滤波" data-kind="方法"
+     data-freq="21">
+  <circle cx="609.1" cy="605.1" r="29.6" fill="#eb6834" stroke="var(--surface-1)" stroke-width="1.5"/>
+  <text x="642.7" y="608.6" class="nlabel">技术方法:滤波</text>
+</g><g class="nd" data-name="技术方法:识别神经生理事件" data-kind="方法"
+     data-freq="21">
+  <circle cx="1130.0" cy="708.0" r="29.6" fill="#eb6834" stroke="var(--surface-1)" stroke-width="1.5"/>
+  <text x="1163.6" y="711.5" class="nlabel">技术方法:识别神经生理事件</text>
+</g><g class="nd" data-name="技术方法:信号采集" data-kind="方法"
+     data-freq="21">
+  <circle cx="699.4" cy="576.3" r="29.6" fill="#eb6834" stroke="var(--surface-1)" stroke-width="1.5"/>
+  <text x="733.1" y="579.8" class="nlabel">技术方法:信号采集</text>
+</g><g class="nd" data-name="技术方法:检测电生理信号" data-kind="方法"
+     data-freq="20">
+  <circle cx="905.6" cy="214.5" r="29.1" fill="#eb6834" stroke="var(--surface-1)" stroke-width="1.5"/>
+  <text x="938.7" y="218.0" class="nlabel">技术方法:检测电生理信号</text>
+</g><g class="nd" data-name="技术方法:分析" data-kind="方法"
+     data-freq="20">
+  <circle cx="745.6" cy="640.5" r="29.1" fill="#eb6834" stroke="var(--surface-1)" stroke-width="1.5"/>
+  
+</g><g class="nd" data-name="技术方法:测量神经响应" data-kind="方法"
+     data-freq="20">
+  <circle cx="436.2" cy="588.7" r="29.1" fill="#eb6834" stroke="var(--surface-1)" stroke-width="1.5"/>
+  
+</g><g class="nd" data-name="技术方法:同时记录多个数据流生物信号测量" data-kind="方法"
+     data-freq="20">
+  <circle cx="570.9" cy="577.0" r="29.1" fill="#eb6834" stroke="var(--surface-1)" stroke-width="1.5"/>
+  
+</g><g class="nd" data-name="技术方法:多模态生理刺激" data-kind="方法"
+     data-freq="19">
+  <circle cx="567.7" cy="571.7" r="28.6" fill="#eb6834" stroke="var(--surface-1)" stroke-width="1.5"/>
+  
+</g><g class="nd" data-name="技术方法:数据清理" data-kind="方法"
+     data-freq="18">
+  <circle cx="429.1" cy="830.7" r="28.1" fill="#eb6834" stroke="var(--surface-1)" stroke-width="1.5"/>
+  
+</g><g class="nd" data-name="技术方法:快速傅里叶变换" data-kind="方法"
+     data-freq="18">
+  <circle cx="672.1" cy="603.7" r="28.1" fill="#eb6834" stroke="var(--surface-1)" stroke-width="1.5"/>
+  
+</g><g class="nd" data-name="技术方法:获取生物信号" data-kind="方法"
+     data-freq="18">
+  <circle cx="443.8" cy="521.9" r="28.1" fill="#eb6834" stroke="var(--surface-1)" stroke-width="1.5"/>
+  
+</g><g class="nd" data-name="技术方法:同时记录多个数据流" data-kind="方法"
+     data-freq="18">
+  <circle cx="570.9" cy="550.1" r="28.1" fill="#eb6834" stroke="var(--surface-1)" stroke-width="1.5"/>
+  
+</g><g class="nd" data-name="技术方法:心理生理信号处理" data-kind="方法"
+     data-freq="18">
+  <circle cx="579.3" cy="663.0" r="28.1" fill="#eb6834" stroke="var(--surface-1)" stroke-width="1.5"/>
+  
+</g><g class="nd" data-name="技术方法:接收神经信号" data-kind="方法"
+     data-freq="16">
+  <circle cx="98.8" cy="60.0" r="27.0" fill="#eb6834" stroke="var(--surface-1)" stroke-width="1.5"/>
+  
+</g><g class="nd" data-name="技术方法:应用权重" data-kind="方法"
+     data-freq="16">
+  <circle cx="734.7" cy="541.4" r="27.0" fill="#eb6834" stroke="var(--surface-1)" stroke-width="1.5"/>
+  
+</g><g class="nd" data-name="生物信号类型:脑电信号" data-kind="信号"
+     data-freq="1223">
+  <circle cx="599.4" cy="517.0" r="166.4" fill="#2a78d6" stroke="var(--surface-1)" stroke-width="1.5"/>
+  <text x="769.8" y="520.5" class="nlabel">生物信号类型:脑电信号</text>
+</g><g class="nd" data-name="生物信号类型:EEG" data-kind="信号"
+     data-freq="782">
+  <circle cx="645.4" cy="574.7" r="134.8" fill="#2a78d6" stroke="var(--surface-1)" stroke-width="1.5"/>
+  <text x="784.2" y="578.2" class="nlabel">生物信号类型:EEG</text>
+</g><g class="nd" data-name="生物信号类型:脑电图信号" data-kind="信号"
+     data-freq="385">
+  <circle cx="661.0" cy="627.7" r="97.3" fill="#2a78d6" stroke="var(--surface-1)" stroke-width="1.5"/>
+  <text x="762.3" y="631.2" class="nlabel">生物信号类型:脑电图信号</text>
+</g><g class="nd" data-name="生物信号类型:神经信号" data-kind="信号"
+     data-freq="254">
+  <circle cx="533.9" cy="464.6" r="80.7" fill="#2a78d6" stroke="var(--surface-1)" stroke-width="1.5"/>
+  <text x="618.6" y="468.1" class="nlabel">生物信号类型:神经信号</text>
+</g><g class="nd" data-name="生物信号类型:EEG信号" data-kind="信号"
+     data-freq="251">
+  <circle cx="696.5" cy="520.4" r="80.3" fill="#2a78d6" stroke="var(--surface-1)" stroke-width="1.5"/>
+  <text x="780.7" y="523.9" class="nlabel">生物信号类型:EEG信号</text>
+</g><g class="nd" data-name="生物信号类型:脑电图(EEG)" data-kind="信号"
+     data-freq="227">
+  <circle cx="556.4" cy="620.2" r="76.8" fill="#2a78d6" stroke="var(--surface-1)" stroke-width="1.5"/>
+  <text x="637.2" y="623.7" class="nlabel">生物信号类型:脑电图(EEG…</text>
+</g><g class="nd" data-name="生物信号类型:脑电波" data-kind="信号"
+     data-freq="222">
+  <circle cx="605.3" cy="631.4" r="76.0" fill="#2a78d6" stroke="var(--surface-1)" stroke-width="1.5"/>
+  <text x="685.4" y="634.9" class="nlabel">生物信号类型:脑电波</text>
+</g><g class="nd" data-name="生物信号类型:脑电图" data-kind="信号"
+     data-freq="193">
+  <circle cx="743.9" cy="576.6" r="71.5" fill="#2a78d6" stroke="var(--surface-1)" stroke-width="1.5"/>
+  <text x="819.4" y="580.1" class="nlabel">生物信号类型:脑电图</text>
+</g><g class="nd" data-name="生物信号类型:脑信号" data-kind="信号"
+     data-freq="165">
+  <circle cx="633.8" cy="455.4" r="66.8" fill="#2a78d6" stroke="var(--surface-1)" stroke-width="1.5"/>
+  
+</g><g class="nd" data-name="生物信号类型:神经活动" data-kind="信号"
+     data-freq="134">
+  <circle cx="878.0" cy="530.0" r="61.1" fill="#2a78d6" stroke="var(--surface-1)" stroke-width="1.5"/>
+  
+</g><g class="nd" data-name="生物信号类型:电信号" data-kind="信号"
+     data-freq="88">
+  <circle cx="549.2" cy="593.2" r="51.2" fill="#2a78d6" stroke="var(--surface-1)" stroke-width="1.5"/>
+  
+</g><g class="nd" data-name="生物信号类型:神经响应" data-kind="信号"
+     data-freq="63">
+  <circle cx="80.0" cy="574.4" r="44.7" fill="#2a78d6" stroke="var(--surface-1)" stroke-width="1.5"/>
+  
+</g>
+</svg>
+<div class="legend">
+  <span class="lg"><span class="dot" style="background:#2a78d6"></span>生物信号类型</span>
+  <span class="lg"><span class="dot" style="background:#eb6834"></span>技术方法</span>
+  <span class="lg note2">节点大小 ∝ 出现频次 · 连线粗细/深浅 ∝ 共现专利数</span>
+</div>
+</div><div id="tip"></div>
+<script>
+const tip=document.getElementById('tip');
+const groups=document.querySelectorAll('.nd');
+const lines=document.querySelectorAll('line');
+groups.forEach(g=>g.addEventListener('mousemove',e=>{
+  tip.style.opacity=1;tip.style.left=(e.clientX+12)+'px';tip.style.top=(e.clientY+12)+'px';
+  tip.innerHTML='<b>'+g.dataset.name+'</b>（'+g.dataset.kind+'）<br>出现频次：'+g.dataset.freq;
+  const n=g.dataset.name;
+  lines.forEach(l=>{
+    l.style.strokeOpacity=(l.dataset.s===n||l.dataset.t===n)?'0.95':'0.05';
+  });
+  groups.forEach(o=>o.classList.toggle('dim',o.dataset.name!==n));
+}));
+groups.forEach(g=>g.addEventListener('mouseleave',()=>{
+  tip.style.opacity=0;
+  lines.forEach(l=>l.style.strokeOpacity='');
+  groups.forEach(o=>o.classList.remove('dim'));
+}));
+</script></body></html>

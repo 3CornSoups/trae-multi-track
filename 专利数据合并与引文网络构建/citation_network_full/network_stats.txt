@@ -1,0 +1,93 @@
+
+======================================================================
+专利引文网络构建报告
+======================================================================
+
+--- 节点统计 ---
+总节点数:                    263,113
+  内部专利 (有元数据):         31,899  ( 12.1%)
+  外部专利 (仅出现在引文):      231,214  ( 87.9%)
+
+--- 边统计 ---
+总边数 (去重后):           1,159,638
+  仅后向来源:                 464,725
+  仅前向来源:                 516,705
+  前后向互证:                 178,208
+自引边 (仅计数未建边):              0
+图内自环 (应为0):                   0
+
+--- 网络结构 ---
+密度:                     0.00001675
+互惠率:                        0.0015
+弱连通分量数:                  3,590
+最大弱连通分量:               258,518 节点 (98.3%)
+孤立节点 (无任何引文):           3,301  (1.3%)
+
+--- 度分布 ---
+平均入度 (被引次数):             4.41
+平均出度 (引用次数):             4.41
+中位入度:                           0
+中位出度:                           1
+最大入度:                       1,629
+最大出度:                       1,791
+
+--- 被引用最多的专利 Top 20 (in_degree) ---
+   1629  US5335657A  Therapeutic treatment of sleep disorder by nerve stimulation
+   1563  US5707400A  Treating refractory hypertension by nerve stimulation
+   1488  US6895280B2  Rechargeable spinal cord stimulator system
+   1446  US6016449A  System for treatment of neurological disorders
+   1350  US5299569A  Treatment of neuropsychiatric disorders by nerve stimulation
+   1326  US4573481A  Implantable electrode array
+   1300  US5231988A  Treatment of endocrine disorders by nerve stimulation
+   1293  US5540730A  Treatment of motility disorders by nerve stimulation
+   1280  US5188104A  Treatment of eating disorders by nerve stimulation
+   1278  US20090088659A1  Biological Sensing With Haptic Feedback
+   1232  US6181969B1  Programmable current output stimulus stage for implantable d
+   1225  US5479934A  EEG headpiece with disposable electrodes and apparatus and s
+   1195  US6341236B1  Vagal nerve stimulation techniques for treatment of epilepti
+   1178  US5540734A  Cranial nerve stimulation treatments using neurocybernetic p
+   1114  US6572542B1  System and method for monitoring and controlling the glycemi
+   1111  US5203326A  Antiarrhythmia pacer using antiarrhythmia pacing and autonom
+   1110  US5862803A  Wireless medical diagnosis and monitoring equipment
+   1108  US6366813B1  Apparatus and method for closed-loop intracranical stimulati
+   1093  US6393325B1  Directional programming for implantable electrode arrays
+   1061  US7162303B2  Renal nerve stimulation method and apparatus for treatment o
+
+--- 引用最多的专利 Top 20 (out_degree) ---
+   1791  US12039731B2  Prediction of candidates for spinal neuromodulation
+   1786  US12458428B2  Vertebral denervation in conjunction with vertebral fusion
+   1708  US12573045B2  Candidate determination for spinal neuromodulation
+   1708  US12670596B2  Prediction of candidates for spinal neuromodulation
+   1698  US11844605B2  System,  method and biomarkers for airway obstruction
+   1680  US12478806B2  Catheter-based devices and associated methods for immune sys
+   1645  US12193719B2  Modulating nerves within bone
+   1624  US12408974B2  Systems and methods for modulating nerves or other tissue
+   1619  US12539167B2  Therapeutic tissue modulation devices and methods
+   1594  US11701168B2  Radiofrequency ablation of tissue within a vertebral body
+   1591  US11690667B2  Radiofrequency ablation of tissue within a vertebral body
+   1553  US8880185B2  Renal denervation and stimulation employing wireless vascula
+   1552  US11737814B2  Cryotherapy treatment for back pain
+   1549  US11596468B2  Intraosseous nerve treatment
+   1537  US12605104B2  Method and apparatus for neuroenhancement
+   1535  US11478603B2  Method and apparatus for neuroenhancement to enhance emotion
+   1534  US11723579B2  Method and apparatus for neuroenhancement
+   1534  US11273283B2  Method and apparatus for neuroenhancement to enhance emotion
+   1534  US11717686B2  Method and apparatus for neuroenhancement to facilitate lear
+   1533  US11364361B2  System and method for inducing sleep by transplanting mental
+
+--- 国别分布 (内部专利) ---
+  CN: 13,688
+  US: 10,248
+  WO: 2,406
+  KR: 2,029
+  EP: 1,018
+  JP: 972
+  IN: 415
+  OTHER: 254
+  AU: 163
+  DE: 157
+  GB: 153
+  CA: 124
+  RU: 98
+  FR: 65
+  IL: 42

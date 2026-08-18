@@ -1,0 +1,460 @@
+{
+  "window": "pre2000",
+  "window_label": "pre-2000 (申请年<2000)",
+  "network_nodes": 43986,
+  "network_edges": 118412,
+  "junk_nodes_removed": 0,
+  "n_paths": 30,
+  "paths": [
+    {
+      "path_id": 1,
+      "total_spc": 0.84835982,
+      "total_splc": 0.03401056,
+      "node_count": 16,
+      "year_start": 1971,
+      "year_end": 1999,
+      "cn_nodes": 0,
+      "internal_nodes": 13,
+      "seed_edge": [
+        "US4493327A",
+        "US4408616A"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 2,
+      "total_spc": 0.70942359,
+      "total_splc": 0.03822707,
+      "node_count": 15,
+      "year_start": 1970,
+      "year_end": 1999,
+      "cn_nodes": 0,
+      "internal_nodes": 12,
+      "seed_edge": [
+        "US4878498A",
+        "US4744029A"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 3,
+      "total_spc": 0.46552348,
+      "total_splc": 0.03979332,
+      "node_count": 13,
+      "year_start": 1970,
+      "year_end": 1999,
+      "cn_nodes": 0,
+      "internal_nodes": 10,
+      "seed_edge": [
+        "US3901215A",
+        "US3696808A"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 4,
+      "total_spc": 0.4411475,
+      "total_splc": 0.03889238,
+      "node_count": 12,
+      "year_start": 1970,
+      "year_end": 1999,
+      "cn_nodes": 0,
+      "internal_nodes": 8,
+      "seed_edge": [
+        "US3893450A",
+        "US3696808A"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 5,
+      "total_spc": 0.39732509,
+      "total_splc": 0.00850128,
+      "node_count": 14,
+      "year_start": 1973,
+      "year_end": 1999,
+      "cn_nodes": 0,
+      "internal_nodes": 10,
+      "seed_edge": [
+        "US4744029A",
+        "US4610259A"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 6,
+      "total_spc": 0.30287562,
+      "total_splc": 0.02040591,
+      "node_count": 13,
+      "year_start": 1970,
+      "year_end": 1998,
+      "cn_nodes": 0,
+      "internal_nodes": 11,
+      "seed_edge": [
+        "US4610259A",
+        "US4412547A"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 7,
+      "total_spc": 0.28581013,
+      "total_splc": 0.02864144,
+      "node_count": 13,
+      "year_start": 1971,
+      "year_end": 1999,
+      "cn_nodes": 0,
+      "internal_nodes": 10,
+      "seed_edge": [
+        "US4201224A",
+        "US4092981A"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 8,
+      "total_spc": 0.26990614,
+      "total_splc": 0.02939811,
+      "node_count": 12,
+      "year_start": 1971,
+      "year_end": 1999,
+      "cn_nodes": 0,
+      "internal_nodes": 8,
+      "seed_edge": [
+        "US4794533A",
+        "US4610259A"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 9,
+      "total_spc": 0.25631539,
+      "total_splc": 0.00616661,
+      "node_count": 9,
+      "year_start": 1978,
+      "year_end": 1999,
+      "cn_nodes": 0,
+      "internal_nodes": 7,
+      "seed_edge": [
+        "US4408616A",
+        "US4201224A"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 10,
+      "total_spc": 0.23561572,
+      "total_splc": 0.0231012,
+      "node_count": 11,
+      "year_start": 1971,
+      "year_end": 1999,
+      "cn_nodes": 0,
+      "internal_nodes": 8,
+      "seed_edge": [
+        "US6317627B1",
+        "US6230049B1"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 11,
+      "total_spc": 0.23414245,
+      "total_splc": 0.00494542,
+      "node_count": 10,
+      "year_start": 1974,
+      "year_end": 1999,
+      "cn_nodes": 0,
+      "internal_nodes": 7,
+      "seed_edge": [
+        "US4873981A",
+        "US4744029A"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 12,
+      "total_spc": 0.19508887,
+      "total_splc": 0.02429702,
+      "node_count": 11,
+      "year_start": 1970,
+      "year_end": 1996,
+      "cn_nodes": 0,
+      "internal_nodes": 8,
+      "seed_edge": [
+        "US4736751A",
+        "US4649482A"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 13,
+      "total_spc": 0.18711705,
+      "total_splc": 0.01286477,
+      "node_count": 13,
+      "year_start": 1946,
+      "year_end": 1999,
+      "cn_nodes": 0,
+      "internal_nodes": 9,
+      "seed_edge": [
+        "US5743860A",
+        "US5626145A"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 14,
+      "total_spc": 0.17220828,
+      "total_splc": 0.0114202,
+      "node_count": 10,
+      "year_start": 1973,
+      "year_end": 1999,
+      "cn_nodes": 0,
+      "internal_nodes": 7,
+      "seed_edge": [
+        "US4579125A",
+        "US4493327A"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 15,
+      "total_spc": 0.16205114,
+      "total_splc": 0.01293149,
+      "node_count": 13,
+      "year_start": 1946,
+      "year_end": 1999,
+      "cn_nodes": 0,
+      "internal_nodes": 9,
+      "seed_edge": [
+        "US5638826A",
+        "US5474082A"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 16,
+      "total_spc": 0.1578338,
+      "total_splc": 0.01455175,
+      "node_count": 11,
+      "year_start": 1973,
+      "year_end": 1999,
+      "cn_nodes": 0,
+      "internal_nodes": 8,
+      "seed_edge": [
+        "US4201224A",
+        "US3901215A"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 17,
+      "total_spc": 0.15247037,
+      "total_splc": 0.01879544,
+      "node_count": 13,
+      "year_start": 1972,
+      "year_end": 1997,
+      "cn_nodes": 0,
+      "internal_nodes": 11,
+      "seed_edge": [
+        "US4092981A",
+        "US3978847A"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 18,
+      "total_spc": 0.14632808,
+      "total_splc": 0.00658985,
+      "node_count": 11,
+      "year_start": 1978,
+      "year_end": 1999,
+      "cn_nodes": 0,
+      "internal_nodes": 9,
+      "seed_edge": [
+        "US4610259A",
+        "US4493327A"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 19,
+      "total_spc": 0.13919295,
+      "total_splc": 0.00537749,
+      "node_count": 9,
+      "year_start": 1978,
+      "year_end": 1999,
+      "cn_nodes": 0,
+      "internal_nodes": 6,
+      "seed_edge": [
+        "US5857978A",
+        "US5392788A"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 20,
+      "total_spc": 0.13606772,
+      "total_splc": 0.00318933,
+      "node_count": 9,
+      "year_start": 1976,
+      "year_end": 1999,
+      "cn_nodes": 0,
+      "internal_nodes": 6,
+      "seed_edge": [
+        "US5626145A",
+        "US5392788A"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 21,
+      "total_spc": 0.12856254,
+      "total_splc": 0.007974,
+      "node_count": 10,
+      "year_start": 1972,
+      "year_end": 1999,
+      "cn_nodes": 0,
+      "internal_nodes": 7,
+      "seed_edge": [
+        "US6549804B1",
+        "US6304775B1"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 22,
+      "total_spc": 0.1271166,
+      "total_splc": 0.01221258,
+      "node_count": 10,
+      "year_start": 1973,
+      "year_end": 1998,
+      "cn_nodes": 0,
+      "internal_nodes": 7,
+      "seed_edge": [
+        "US4610259A",
+        "US4408616A"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 23,
+      "total_spc": 0.11739583,
+      "total_splc": 0.0267647,
+      "node_count": 11,
+      "year_start": 1970,
+      "year_end": 1999,
+      "cn_nodes": 0,
+      "internal_nodes": 8,
+      "seed_edge": [
+        "US5392788A",
+        "US5003986A"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 24,
+      "total_spc": 0.11422937,
+      "total_splc": 0.02532939,
+      "node_count": 10,
+      "year_start": 1971,
+      "year_end": 1999,
+      "cn_nodes": 0,
+      "internal_nodes": 7,
+      "seed_edge": [
+        "US3837331A",
+        "US3753433A"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 25,
+      "total_spc": 0.10425614,
+      "total_splc": 0.00303239,
+      "node_count": 9,
+      "year_start": 1976,
+      "year_end": 1998,
+      "cn_nodes": 0,
+      "internal_nodes": 6,
+      "seed_edge": [
+        "US4987903A",
+        "US4794533A"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 26,
+      "total_spc": 0.10001271,
+      "total_splc": 0.01255178,
+      "node_count": 11,
+      "year_start": 1972,
+      "year_end": 1999,
+      "cn_nodes": 0,
+      "internal_nodes": 8,
+      "seed_edge": [
+        "US4171696A",
+        "US3837331A"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 27,
+      "total_spc": 0.08188715,
+      "total_splc": 0.01360393,
+      "node_count": 7,
+      "year_start": 1973,
+      "year_end": 1999,
+      "cn_nodes": 0,
+      "internal_nodes": 4,
+      "seed_edge": [
+        "US4201224A",
+        "US3893450A"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 28,
+      "total_spc": 0.07935065,
+      "total_splc": 0.00984797,
+      "node_count": 8,
+      "year_start": 1973,
+      "year_end": 1999,
+      "cn_nodes": 0,
+      "internal_nodes": 5,
+      "seed_edge": [
+        "US5269302A",
+        "US4878498A"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 29,
+      "total_spc": 0.0672894,
+      "total_splc": 0.00207198,
+      "node_count": 8,
+      "year_start": 1979,
+      "year_end": 1999,
+      "cn_nodes": 0,
+      "internal_nodes": 6,
+      "seed_edge": [
+        "US4493327A",
+        "US4275744A"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 30,
+      "total_spc": 0.06508878,
+      "total_splc": 0.00733544,
+      "node_count": 7,
+      "year_start": 1972,
+      "year_end": 1999,
+      "cn_nodes": 0,
+      "internal_nodes": 5,
+      "seed_edge": [
+        "US6230049B1",
+        "US5857978A"
+      ],
+      "stage": "strict"
+    }
+  ]
+}

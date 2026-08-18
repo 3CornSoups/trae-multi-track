@@ -1,0 +1,235 @@
+{
+  "window": "2000_2005",
+  "window_label": "2000-2005",
+  "network_nodes": 60332,
+  "network_edges": 185172,
+  "junk_nodes_removed": 1,
+  "n_paths": 15,
+  "paths": [
+    {
+      "path_id": 1,
+      "total_spc": 8128.74739922,
+      "total_splc": 0.05966645,
+      "node_count": 9,
+      "year_start": 2002,
+      "year_end": 2005,
+      "cn_nodes": 0,
+      "internal_nodes": 9,
+      "seed_edge": [
+        "US7024247B2",
+        "US20030130706A1"
+      ],
+      "stage": "relaxed"
+    },
+    {
+      "path_id": 2,
+      "total_spc": 8018.86675646,
+      "total_splc": 0.05846,
+      "node_count": 9,
+      "year_start": 2002,
+      "year_end": 2005,
+      "cn_nodes": 0,
+      "internal_nodes": 7,
+      "seed_edge": [
+        "US20050021118A1",
+        "US20040102828A1"
+      ],
+      "stage": "relaxed"
+    },
+    {
+      "path_id": 3,
+      "total_spc": 7374.99156122,
+      "total_splc": 0.05515559,
+      "node_count": 9,
+      "year_start": 2002,
+      "year_end": 2005,
+      "cn_nodes": 0,
+      "internal_nodes": 7,
+      "seed_edge": [
+        "US20030074032A1",
+        "US20050021118A1"
+      ],
+      "stage": "relaxed"
+    },
+    {
+      "path_id": 4,
+      "total_spc": 6596.42290739,
+      "total_splc": 0.04063496,
+      "node_count": 6,
+      "year_start": 2001,
+      "year_end": 2005,
+      "cn_nodes": 0,
+      "internal_nodes": 5,
+      "seed_edge": [
+        "US7010351B2",
+        "US20030187490A1"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 5,
+      "total_spc": 6007.43446716,
+      "total_splc": 0.03597303,
+      "node_count": 6,
+      "year_start": 2002,
+      "year_end": 2005,
+      "cn_nodes": 0,
+      "internal_nodes": 5,
+      "seed_edge": [
+        "US20050070971A1",
+        "US20050021105A1"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 6,
+      "total_spc": 5534.93863711,
+      "total_splc": 0.03660375,
+      "node_count": 6,
+      "year_start": 2002,
+      "year_end": 2005,
+      "cn_nodes": 0,
+      "internal_nodes": 6,
+      "seed_edge": [
+        "US20040102828A1",
+        "US20050021105A1"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 7,
+      "total_spc": 5476.91243665,
+      "total_splc": 0.04069652,
+      "node_count": 7,
+      "year_start": 2002,
+      "year_end": 2004,
+      "cn_nodes": 0,
+      "internal_nodes": 7,
+      "seed_edge": [
+        "US7024247B2",
+        "US20030187490A1"
+      ],
+      "stage": "relaxed"
+    },
+    {
+      "path_id": 8,
+      "total_spc": 5373.0923069,
+      "total_splc": 0.05765608,
+      "node_count": 11,
+      "year_start": 2001,
+      "year_end": 2005,
+      "cn_nodes": 0,
+      "internal_nodes": 8,
+      "seed_edge": [
+        "US20050004620A1",
+        "US20030130706A1"
+      ],
+      "stage": "relaxed"
+    },
+    {
+      "path_id": 9,
+      "total_spc": 5329.63026826,
+      "total_splc": 0.03320126,
+      "node_count": 5,
+      "year_start": 2002,
+      "year_end": 2004,
+      "cn_nodes": 0,
+      "internal_nodes": 5,
+      "seed_edge": [
+        "US20030097161A1",
+        "US20050021105A1"
+      ],
+      "stage": "strict"
+    },
+    {
+      "path_id": 10,
+      "total_spc": 4913.82416466,
+      "total_splc": 0.041526,
+      "node_count": 7,
+      "year_start": 2002,
+      "year_end": 2004,
+      "cn_nodes": 0,
+      "internal_nodes": 5,
+      "seed_edge": [
+        "US20050070971A1",
+        "US20050021118A1"
+      ],
+      "stage": "relaxed"
+    },
+    {
+      "path_id": 11,
+      "total_spc": 4460.89518992,
+      "total_splc": 0.03520674,
+      "node_count": 9,
+      "year_start": 2001,
+      "year_end": 2004,
+      "cn_nodes": 0,
+      "internal_nodes": 6,
+      "seed_edge": [
+        "US20050021105A1",
+        "US20040102828A1"
+      ],
+      "stage": "relaxed"
+    },
+    {
+      "path_id": 12,
+      "total_spc": 3920.36526799,
+      "total_splc": 0.04534577,
+      "node_count": 9,
+      "year_start": 2002,
+      "year_end": 2004,
+      "cn_nodes": 0,
+      "internal_nodes": 7,
+      "seed_edge": [
+        "US20050070971A1",
+        "US20030074032A1"
+      ],
+      "stage": "relaxed"
+    },
+    {
+      "path_id": 13,
+      "total_spc": 3311.34907709,
+      "total_splc": 0.02452987,
+      "node_count": 5,
+      "year_start": 2002,
+      "year_end": 2004,
+      "cn_nodes": 0,
+      "internal_nodes": 5,
+      "seed_edge": [
+        "US20050021118A1",
+        "US20030097161A1"
+      ],
+      "stage": "relaxed"
+    },
+    {
+      "path_id": 14,
+      "total_spc": 3288.9178828,
+      "total_splc": 0.0342867,
+      "node_count": 7,
+      "year_start": 2002,
+      "year_end": 2005,
+      "cn_nodes": 0,
+      "internal_nodes": 4,
+      "seed_edge": [
+        "US20050033378A1",
+        "US20050021105A1"
+      ],
+      "stage": "relaxed"
+    },
+    {
+      "path_id": 15,
+      "total_spc": 3013.87619231,
+      "total_splc": 0.0233464,
+      "node_count": 5,
+      "year_start": 2002,
+      "year_end": 2004,
+      "cn_nodes": 0,
+      "internal_nodes": 5,
+      "seed_edge": [
+        "US20050021105A1",
+        "US20030097161A1"
+      ],
+      "stage": "relaxed"
+    }
+  ]
+}
