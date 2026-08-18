@@ -101,7 +101,7 @@ LLM 相关性判定：`python scripts/filter_relevance.py`（需 DEEPSEEK_API_KE
 |---|---|
 | `outputs/风险分析报告.md` | 合并版结论报告（三份实验、五版本对比 + 解读） |
 | `outputs/替代风险报告_theme.md` | 主题对版完整报告（实验三章节 + 硬阈值口径） |
-| `outputs/替代风险指标总表*.csv` ×5 | 五版本全部指标（IPC 147/133 行、配对 6 行、主题对 1980 行 × 28 列） |
+| `outputs/替代风险指标总表*.csv` ×5 | 五版本全部指标（IPC 147/133 行、配对 6 行、主题对 1980 行 × 29 列，问题相似度仅主题版有值） |
 | `outputs/主路径全景概况.md` | 全部 163 条主路径的技术主线 |
 | `outputs/intermediate/patent_theme.csv` | 主题凝练结果（2493 条专利 → 45 主题） |
 | `outputs/intermediate/patent_route_theme.csv` | 主题版专利表（含 KG 问题实体列） |
