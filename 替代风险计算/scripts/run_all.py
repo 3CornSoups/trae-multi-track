@@ -31,8 +31,13 @@ COLUMN_MAP = {
     'dPA': 'Δp_A', 'dPB': 'Δp_B', 'T': 'T_AB', 'M': 'M_AB',
     'K': 'K_B', 'A': 'A_B', 'V': 'V_B', 'R': 'R_AB',
     'flags': '标记', 'risk_rank': '风险排名',
+    'problem_sim': '问题相似度',   # 终审修复（M-建议-5）：主题版前提①（问题相似度）落盘
 }
 COLUMN_ORDER = list(COLUMN_MAP.values())
+# 终审修复（M-建议-5）：'问题相似度' 置于列序末尾（'风险排名' 之前）；
+# 仅 theme 版该列有值，IPC/配对版该列全空（不影响既有按列名取值断言）。
+COLUMN_ORDER.remove('问题相似度')
+COLUMN_ORDER.insert(COLUMN_ORDER.index('风险排名'), '问题相似度')
 
 # 高价值判定数据源（设计文档 §2）：引文网络全量节点表
 NODES_CSV = os.path.join(PROJECT_ROOT, '专利数据合并与引文网络构建',
@@ -135,7 +140,7 @@ def _main_theme(cfg: dict) -> None:
             return 0.0   # 空集合 → 该维相似度记 0（embed_similarity 同口径）
         return symmetric_max_match(a, b)
 
-    def gated_row(x, y, F, C, H, mark):
+    def gated_row(x, y, F, C, H, problem_sim, mark):
         return {
             'topic_code': f'{x}→{y}',
             'topic_name': f'{theme_names[x]}→{theme_names[y]}',
@@ -154,6 +159,7 @@ def _main_theme(cfg: dict) -> None:
             'dPA': None, 'dPB': None, 'T': None, 'M': None,
             'K': None, 'A': None, 'V': None, 'R': None,
             'flags': [mark],
+            'problem_sim': problem_sim,
         }
 
     rows = []
@@ -167,14 +173,14 @@ def _main_theme(cfg: dict) -> None:
             C = sim(vec_cache[x]['scene'], vec_cache[y]['scene'])
             H = 1.0 - sim(vec_cache[x]['princ'], vec_cache[y]['princ'])
             if not premise_pass(problem_sim, H):
-                rows.append(gated_row(x, y, F, C, H, '未过前提'))
+                rows.append(gated_row(x, y, F, C, H, problem_sim, '未过前提'))
                 continue
             if not threshold_pass(F, C, H):
-                rows.append(gated_row(x, y, F, C, H, '未达阈值'))
+                rows.append(gated_row(x, y, F, C, H, problem_sim, '未达阈值'))
                 continue
             dom = [p for p in theme_patents[x] if p['is_cn'] == 1]
             for_ = [p for p in theme_patents[y] if p['is_cn'] == 0]
-            rows.append(per_topic_indicators(
+            row = per_topic_indicators(
                 topic_code=f'{x}→{y}',
                 topic_name=f'{theme_names[x]}→{theme_names[y]}',
                 dom=dom, for_=for_,
@@ -187,7 +193,9 @@ def _main_theme(cfg: dict) -> None:
                 min_patents=cfg['min_patents'],
                 exposure=theme_patents[y],
                 fch={'F': F, 'C': C, 'H': H},
-            ))
+            )
+            row['problem_sim'] = problem_sim   # 终审修复（M-建议-5）
+            rows.append(row)
 
     df = pd.DataFrame(rows)
     df['flags'] = df['flags'].map(lambda f: ';'.join(f) if f else '')
@@ -287,6 +295,7 @@ def main() -> None:
         ))
 
     df = pd.DataFrame(rows)
+    df['problem_sim'] = np.nan   # 终审修复（M-建议-5）：IPC/配对版该列留空
     df['flags'] = df['flags'].map(lambda f: ';'.join(f) if f else '')
     df['risk_rank'] = np.nan
     # 软阈值+全量排名：有 R 即参与排名（标记不再排除排名）

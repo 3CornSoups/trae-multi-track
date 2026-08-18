@@ -143,8 +143,10 @@ def parse_tag_results(path: str) -> pd.DataFrame:
             tags = (parsed or {}).get('tags') or {}
             if isinstance(tags, dict):
                 for pub, tag in tags.items():
-                    rows.append({'pub': str(pub).strip(),
-                                 'tag': str(tag).strip()})
+                    pub_s, tag_s = str(pub).strip(), str(tag).strip()
+                    if not pub_s or not tag_s:
+                        continue   # 终审修复（M-建议-6）：空串过滤，跳过
+                    rows.append({'pub': pub_s, 'tag': tag_s})
     return pd.DataFrame(rows, columns=['pub', 'tag'])
 
 
@@ -249,7 +251,10 @@ def parse_merge_results(path: str) -> pd.DataFrame:
             groups = (parsed or {}).get('groups', [])
             for grp in groups:
                 for tag in grp:
-                    rows.append({'tag': str(tag).strip(), 'group_id': f'T{gid}'})
+                    tag_s = str(tag).strip()
+                    if not tag_s:
+                        continue   # 终审修复（M-建议-6）：空串过滤，跳过
+                    rows.append({'tag': tag_s, 'group_id': f'T{gid}'})
                 gid += 1
     return pd.DataFrame(rows, columns=['tag', 'group_id'])
 
@@ -322,7 +327,7 @@ def main() -> None:
     # 第二层凝练（经验证调整）：一级归并按 50 标签/批独立进行，同义标签无法跨批相遇；
     # LLM 宽泛归并三版提示词均失败（模型只做细粒度同义归并，收敛在 ~800 个代表，
     # 且 5~15 组/批与 2~20 标签/组两种约束下均输出 1:1 组，长响应截断）→
-    # 改用 bge-small-zh 嵌入 + 凝聚聚类（确定性、主题数固定 35 落在验收 10~60）
+    # 改用 bge-small-zh 嵌入 + 凝聚聚类（确定性、主题数固定 45 落在验收 10~60）
     # + LLM 命名（模型擅长领域）。全部一级组代表（含未入组标签）参与聚类。
     g1 = set(l1['tag'])
     t1 = tags.merge(l1, on='tag')

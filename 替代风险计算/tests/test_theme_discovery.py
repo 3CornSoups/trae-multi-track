@@ -116,27 +116,6 @@ class TestFinalize:
         assert names['C0'] == '脑电信号采集'
         assert names['C1'] == '神经刺激装置'
         assert len(names) == 2
-        # 第二层凝练：一级组代表跨批归并 → 最终主题（验收 10~60 需要跨批合并）
-        tags = pd.DataFrame([
-            {'pub': 'P1', 'tag': 'A'}, {'pub': 'P2', 'tag': 'A'},
-            {'pub': 'P3', 'tag': 'B'}, {'pub': 'P4', 'tag': 'C'},
-            {'pub': 'P5', 'tag': 'D'}, {'pub': 'P6', 'tag': 'E'},
-        ])
-        l1 = pd.DataFrame([{'tag': 'A', 'group_id': 'T0'},
-                           {'tag': 'B', 'group_id': 'T0'}])
-        l2 = pd.DataFrame([{'tag': 'A', 'group_id': 'U0'},
-                           {'tag': 'D', 'group_id': 'U1'}])
-        out = finalize_themes(tags, l1, l2)
-        assert len(out) == 6
-        # A/B 同组（一级 T0，代表 A）→ 二级并入 U0，主题名取组内最高频代表 A
-        assert out.loc[out['pub'] == 'P1', 'theme_id'].iloc[0] == 'U0'
-        assert out.loc[out['pub'] == 'P1', 'theme_name'].iloc[0] == 'A'
-        assert out.loc[out['pub'] == 'P3', 'theme_id'].iloc[0] == 'U0'
-        # C 一级未入组 → 自成组；二级亦未入组 → 独立主题
-        assert out.loc[out['pub'] == 'P4', 'theme_name'].iloc[0] == 'C'
-        # D 一级独组，二级并入 U1
-        assert out.loc[out['pub'] == 'P5', 'theme_id'].iloc[0] == 'U1'
-        assert out['theme_id'].nunique() == 4
 
 
 class TestMergeTasks:

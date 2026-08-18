@@ -2,6 +2,7 @@
 """读指标总表生成 Markdown 报告。"""
 import json
 import os
+from itertools import chain
 
 import pandas as pd
 
@@ -24,9 +25,12 @@ def _theme_summary(df: pd.DataFrame) -> str:
     n_premise = int((df['标记'].fillna('').str.contains('未过前提')).sum())
     n_thr = int((df['标记'].fillna('').str.contains('未达阈值')).sum())
     n_ranked = len(ranked)
+    # 终审修复（I-1）：主题码为 "X→Y" 有序对——真实主题数 = 拆对两半的并集去重
+    # （如 1980 行 → 45 个主题），替代字面占位 "N 个主题"。
+    n_themes = len(set(chain.from_iterable(code.split('→') for code in df['主题码'])))
     lines = ['## 实验三：文档要求版（要素凝练主题 + 替代候选双前提 + 硬阈值）\n']
     lines.append('- 口径：按《替代风险计算研究方案.md》第三步——从知识要素凝练技术主题'
-                 '（LLM 逐条标签 + 归并，N 个主题）；替代候选须同时满足'
+                 f'（LLM 逐条标签 + 归并，{n_themes} 个主题）；替代候选须同时满足'
                  '"解决同一类问题（问题相似度≥0.5）"与"原理明显不同（H≥0.3）"两个前提；'
                  f'仅 F≥0.6/C≥0.5/H≥0.3 全过的路线对才计算综合得分（硬阈值）。')
     lines.append(f'- 结果：{n_all} 个主题对中，{n_premise} 对未过双前提、'
@@ -289,6 +293,14 @@ def render_report(df: pd.DataFrame, params: dict, top_n: int = 20,
                      f'{n_c_fail} 对、H<0.3 的 {n_h_fail} 对（含未过前提的对，'
                      '其 F/C/H 亦照填）；与"未过双前提/未达阈值"两个标记合计对照，'
                      '可定位主要门槛。')
+        # 终审修复（I-3）：达标率高系主题粒度领域特性归因（与实验二 H 临界窄带对照）
+        if len(ranked):
+            lines.append(f'- 达标率高达 {len(ranked)/total_topics*100:.0f}% 的原因：'
+                         f'{n_themes} 个主题由同一 BCI 领域凝练而来，功能/场景普遍相似'
+                         f'（F/C 均值≈{df["F_AB"].dropna().mean():.2f}），原理差异普遍'
+                         f'满足 H≥0.3（仅 {n_h_fail} 对不足）——F 是实际主要门槛；'
+                         '这是主题粒度的领域特性，与实验二 6 对挤在 H 临界窄带'
+                         '（0.288~0.303）形成对照，说明文档硬阈值在主题粒度下是稳健筛选器。')
         n_no_r = int((df['风险排名'].isna()
                       & ~df['标记'].astype(str).str.contains(
                           '未过前提|未达阈值', na=False)).sum())
@@ -368,10 +380,21 @@ def render_report(df: pd.DataFrame, params: dict, top_n: int = 20,
     if caliber == 'ipc':
         lines.append('6. 40 个无有效主IPC 的专利未进任何主题；13 个无摘要专利不在 KG 中，'
                      '仅可能出现在主路径节点（计入主路径分母、无主题归属）。')
+    elif caliber == 'theme':
+        # 终审修复（I-2）：披露 13 条 LLM 标签回显乱码公开号未入主题（与局限#7 的
+        # 13 个无摘要专利是不同批次；theme_in=实际入主题数，patent_n 即 2480）
+        theme_in = patent_n if patent_n is not None else 2480
+        lines.append(f'6. 另有 {2493 - theme_in} 条专利因 LLM 标签回显的公开号乱码'
+                     f'（如 US11132625B1→US111326325B1）无法与路由表匹配，未进任何主题'
+                     f'（研究数据集实际入主题 {theme_in}/2493）。')
+        lines.append('7. 13 个无摘要专利不在 KG 中，仅可能出现在主路径节点'
+                     '（计入主路径分母、无主题归属）（指主路径分母节点，'
+                     '与上述乱码 13 条是不同批次）。')
     else:
         lines.append('6. 13 个无摘要专利不在 KG 中，仅可能出现在主路径节点'
                      '（计入主路径分母、无主题归属）。')
-    lines.append('7. 高价值阈值取引文网络内部节点（31899 个）被引次数 top10% 分位'
+    hi_idx = 8 if caliber == 'theme' else 7
+    lines.append(f'{hi_idx}. 高价值阈值取引文网络内部节点（31899 个）被引次数 top10% 分位'
                  '（约 44 次），对阈值敏感；可在 config.json 调整 high_value_quantile。')
     if caliber == 'paths':
         lines.append(f'8. 原理差异阈值 H≥0.3 在路线版中高度敏感：6 对 H 值全部落在 '
@@ -385,7 +408,8 @@ def render_report(df: pd.DataFrame, params: dict, top_n: int = 20,
     else:
         patent_note = (f'（研究数据集 {patent_n} 专利、' if patent_n is not None
                        else '（研究数据集 2863 专利、')
-        lines.append(f'8. 本报告全部数字基于 2026-08-18 运行数据'
+        note_idx = 9 if caliber == 'theme' else 8
+        lines.append(f'{note_idx}. 本报告全部数字基于 2026-08-18 运行数据'
                      f'{patent_note}引文网络内部节点 31899 个）；数据更新后请重跑 '
                      'prepare→embed_similarity→run_all→generate_report。')
     # 主口径无达标候选时：软阈值参考排名附录（非主口径，仅供相对比较）

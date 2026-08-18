@@ -1,9 +1,15 @@
 # -*- coding: utf-8 -*-
 import os
+import sys
 
 import numpy as np
 import pandas as pd
 import pytest
+
+# 终审修复：TestExpSuffix 内 `from run_all import exp_suffix_of` 依赖 scripts 在
+# sys.path——与 test_report/test_theme_discovery 同款注入，保证单文件运行也全绿
+# （此前仅全量收集顺序碰巧可导入）。
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'scripts'))
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT_CSV = os.path.join(ROOT, 'outputs', '替代风险指标总表.csv')
@@ -165,3 +171,16 @@ class TestThemeRun:
         # 硬阈值语义：有排名的行 F/C/H 必须全部达标
         for _, r in ranked.iterrows():
             assert r['F_AB'] >= 0.6 and r['C_AB'] >= 0.5 and r['H_AB'] >= 0.3
+        # 终审修复（M-建议-4）：计数断言（1980 对 / 30 未过前提 / 230 未达阈值 /
+        # 140 无高价值 / 1580 达标排名；Top1=C31→C8 R=0.5084）
+        n_premise = (df['标记'].fillna('').str.contains('未过前提')).sum()
+        n_thr = (df['标记'].fillna('').str.contains('未达阈值')).sum()
+        n_no_hv = (df['标记'].fillna('').str.contains('无高价值专利')).sum()
+        assert len(df) == 1980
+        assert n_premise == 30 and n_thr == 230 and n_no_hv == 140
+        assert (df['风险排名'].notna()).sum() == 1580
+        top = df.dropna(subset=['风险排名']).sort_values('风险排名').iloc[0]
+        assert top['主题码'] == 'C31→C8'
+        assert abs(top['R_AB'] - 0.5084) < 0.001
+        # 终审修复（M-建议-5）：问题相似度（前提①）落盘——theme 版全表该列有值
+        assert (df['问题相似度'].notna()).sum() == len(df)
