@@ -147,3 +147,21 @@ class TestPathsFilteredRun:
         for col in ['S_AB', 'R_AB']:
             vals = df[col].dropna()
             assert ((vals >= 0) & (vals <= 1)).all(), f'{col} 越界'
+
+
+THEME_CSV = os.path.join(ROOT, 'outputs', '替代风险指标总表_theme.csv')
+
+
+class TestThemeRun:
+    def test_theme_outputs_exist(self):
+        assert os.path.exists(THEME_CSV)
+        df = pd.read_csv(THEME_CSV, dtype={'主题码': str})
+        assert len(df) >= 10                       # 主题对数（N×(N-1) 的达标子集或全部留行）
+        ranked = df.loc[df['风险排名'].notna()]
+        assert len(ranked) >= 1                    # 至少一个达标对参与排名（若为 0 停下核对并报告）
+        for col in ['S_AB', 'R_AB']:
+            vals = df[col].dropna()
+            assert ((vals >= 0) & (vals <= 1)).all(), f'{col} 越界'
+        # 硬阈值语义：有排名的行 F/C/H 必须全部达标
+        for _, r in ranked.iterrows():
+            assert r['F_AB'] >= 0.6 and r['C_AB'] >= 0.5 and r['H_AB'] >= 0.3

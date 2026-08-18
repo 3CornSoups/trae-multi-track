@@ -1,0 +1,496 @@
+{
+  "period": "2000-2026",
+  "overall": {
+    "功能主线": {
+      "描述": "基于EEG、fMRI、MEG等多模态神经响应测量，评估营销与娱乐刺激有效性，并实现广告内容选择、注意力检测与刺激位置优化。",
+      "关键词_中": [
+        "神经响应数据",
+        "脑电图",
+        "脑磁图",
+        "功能磁共振成像",
+        "事件相关电位",
+        "皮肤电流响应",
+        "眼电描记术",
+        "营销和娱乐刺激",
+        "刺激材料",
+        "有效性",
+        "共振",
+        "启动水平",
+        "广告间隙",
+        "元标记",
+        "注意力检测"
+      ],
+      "关键词_英": [
+        "Neuro-response data",
+        "EEG",
+        "MEG",
+        "fMRI",
+        "ERP",
+        "GSR",
+        "EOG",
+        "marketing and entertainment stimuli",
+        "stimulus material",
+        "effectiveness",
+        "resonance",
+        "priming level",
+        "advertisement breaks",
+        "meta tagging",
+        "attention detection"
+      ]
+    },
+    "解决问题": {
+      "描述": "解决如何量化消费者/观众对刺激材料的神经反应，以评估营销和娱乐内容的效果并优化投放位置与方式。",
+      "关键词_中": [
+        "消费者体验",
+        "观众响应",
+        "神经反应",
+        "刺激有效性",
+        "共振估计",
+        "启动水平",
+        "广告位置选择",
+        "注意力检测",
+        "实体和关系评估",
+        "数据同步",
+        "刺激放置",
+        "位置感知",
+        "个性化",
+        "数据管理"
+      ],
+      "关键词_英": [
+        "consumer experience",
+        "audience response",
+        "neuro-response",
+        "stimulus effectiveness",
+        "resonance estimation",
+        "priming level",
+        "ad placement selection",
+        "attention detection",
+        "entity and relationship assessment",
+        "data synchronization",
+        "stimulus placement",
+        "location awareness",
+        "personalization",
+        "data management"
+      ]
+    },
+    "应用场景": {
+      "描述": "应用于广告、营销、娱乐及媒体递送环境，包括电视/计算机监视器、无线设备、商店/广告牌、家庭/工作/实验室等。",
+      "关键词_中": [
+        "广告",
+        "营销",
+        "娱乐",
+        "媒体递送设备",
+        "电视",
+        "计算机监视器",
+        "无线设备",
+        "商店监视器",
+        "广告牌",
+        "家庭",
+        "工作",
+        "实验室",
+        "公司环境",
+        "视频流",
+        "印刷广告"
+      ],
+      "关键词_英": [
+        "advertising",
+        "marketing",
+        "entertainment",
+        "media delivery devices",
+        "television",
+        "computer monitor",
+        "wireless device",
+        "store monitor",
+        "billboard",
+        "home",
+        "work",
+        "laboratory",
+        "office environment",
+        "video stream",
+        "print advertisement"
+      ]
+    },
+    "技术原理": {
+      "描述": "利用中枢神经、自主神经和效应器信号，通过多模态采集、过滤、同步、分布式处理及共振分析来评估神经响应。",
+      "关键词_中": [
+        "中枢神经系统",
+        "自主神经系统",
+        "效应器数据",
+        "多模态",
+        "数据过滤",
+        "跨模态干扰移除",
+        "模态内响应合成",
+        "跨模态响应合成",
+        "干电极",
+        "数据同步",
+        "分布式数据收集",
+        "时钟信号",
+        "数据模型",
+        "储存库"
+      ],
+      "关键词_英": [
+        "central nervous system",
+        "autonomic nervous system",
+        "effector data",
+        "multimodal",
+        "data filtering",
+        "cross-modal interference removal",
+        "within-modal response synthesis",
+        "cross-modal response synthesis",
+        "dry electrodes",
+        "data synchronization",
+        "distributed data collection",
+        "clock signal",
+        "data model",
+        "repository"
+      ]
+    }
+  },
+  "paths": [
+    {
+      "path_id": 1,
+      "差异化特征": {
+        "功能侧重": {
+          "描述": "侧重神经响应数据同步与位置感知的刺激材料呈现，并整合中枢/自主/效应器数据评估营销和娱乐有效性。",
+          "关键词_中": [
+            "数据同步",
+            "位置感知",
+            "刺激材料",
+            "呈现",
+            "原位接合监测",
+            "便携式脑电图耳机",
+            "中枢神经系统",
+            "自主神经系统",
+            "效应器数据",
+            "营销和娱乐"
+          ],
+          "关键词_英": [
+            "data synchronization",
+            "location aware",
+            "stimulus material",
+            "presentation",
+            "in-situ engagement monitoring",
+            "portable EEG headset",
+            "central nervous system",
+            "autonomic nervous system",
+            "effector data",
+            "marketing and entertainment"
+          ]
+        },
+        "问题侧重": {
+          "描述": "解决神经响应数据与刺激呈现同步，以及基于位置和路径信息向用户个性化递送刺激材料的问题。",
+          "关键词_中": [
+            "同步",
+            "时钟信号",
+            "位置和路径信息",
+            "个性化",
+            "递送",
+            "折扣",
+            "促销",
+            "广告",
+            "无线设备",
+            "刺激材料"
+          ],
+          "关键词_英": [
+            "synchronization",
+            "clock signal",
+            "location and path information",
+            "personalized",
+            "delivery",
+            "discounts",
+            "promotions",
+            "advertisements",
+            "wireless device",
+            "stimulus material"
+          ]
+        },
+        "场景侧重": {
+          "描述": "应用于媒体递送设备、无线设备、商店监视器/广告牌及家庭/工作/娱乐等多环境，强化实时和位置场景。",
+          "关键词_中": [
+            "媒体递送设备",
+            "电视",
+            "计算机监视器",
+            "无线设备",
+            "商店监视器",
+            "广告牌",
+            "家庭",
+            "工作",
+            "娱乐设置",
+            "位置感知"
+          ],
+          "关键词_英": [
+            "media delivery devices",
+            "television",
+            "computer monitor",
+            "wireless device",
+            "store monitor",
+            "billboard",
+            "home",
+            "work",
+            "entertainment settings",
+            "location aware"
+          ]
+        },
+        "原理差异": {
+          "描述": "原理上采用带时钟源的EEG耳机实现数据同步，使用干电极、多个点电极和便携式设计，并引入位置感知呈现机制。",
+          "关键词_中": [
+            "时钟源",
+            "时钟发射器",
+            "EEG耳机",
+            "多个点电极",
+            "干电极",
+            "便携式",
+            "检测器电路",
+            "注意力检测器处理器",
+            "位置感知",
+            "信号"
+          ],
+          "关键词_英": [
+            "clock source",
+            "clock transmitter",
+            "EEG headset",
+            "multiple point electrodes",
+            "dry electrodes",
+            "portable",
+            "detector circuit",
+            "attention detector processor",
+            "location aware",
+            "signal"
+          ]
+        }
+      }
+    },
+    {
+      "path_id": 2,
+      "差异化特征": {
+        "功能侧重": {
+          "描述": "侧重神经响应数据的储存库系统管理，提供高效的数据生成、管理、访问、查询、报告分析和可视化。",
+          "关键词_中": [
+            "神经信息储存库系统",
+            "中枢神经系统",
+            "自主神经系统",
+            "效应器数据",
+            "行为数据",
+            "数据模型",
+            "查询",
+            "报告生成",
+            "分析",
+            "可视化"
+          ],
+          "关键词_英": [
+            "neuro-informatics repository system",
+            "central nervous system",
+            "autonomic nervous system",
+            "effector data",
+            "behavior data",
+            "data model",
+            "query",
+            "report generation",
+            "analysis",
+            "visualization"
+          ]
+        },
+        "问题侧重": {
+          "描述": "解决神经响应数据的高效生成、管理、访问问题，以及多源数据的组织与检索。",
+          "关键词_中": [
+            "管理",
+            "访问",
+            "生成",
+            "组织",
+            "检索",
+            "数据模型",
+            "查询",
+            "报告生成",
+            "可视化",
+            "中枢神经系统"
+          ],
+          "关键词_英": [
+            "management",
+            "access",
+            "generation",
+            "organization",
+            "retrieval",
+            "data model",
+            "query",
+            "report generation",
+            "visualization",
+            "central nervous system"
+          ]
+        },
+        "场景侧重": {
+          "描述": "应用于需要对大规模神经响应数据进行集中管理和访问的营销与娱乐研究及广告内容选择。",
+          "关键词_中": [
+            "营销",
+            "娱乐",
+            "广告",
+            "刺激材料",
+            "神经信息储存库",
+            "数据管理",
+            "调查",
+            "行为数据",
+            "刺激",
+            "内容选择"
+          ],
+          "关键词_英": [
+            "marketing",
+            "entertainment",
+            "advertising",
+            "stimulus material",
+            "neuro-informatics repository",
+            "data management",
+            "survey",
+            "behavior data",
+            "stimulus",
+            "content selection"
+          ]
+        },
+        "原理差异": {
+          "描述": "原理上采用多种数据模型存储神经数据，支持有效查询、报告生成、分析和可视化，并整合中枢/自主/效应器及行为数据。",
+          "关键词_中": [
+            "数据模型",
+            "储存库",
+            "查询",
+            "报告生成",
+            "分析",
+            "可视化",
+            "多模态",
+            "中枢神经系统",
+            "自主神经系统",
+            "效应器数据",
+            "行为数据"
+          ],
+          "关键词_英": [
+            "data model",
+            "repository",
+            "query",
+            "report generation",
+            "analysis",
+            "visualization",
+            "multimodal",
+            "central nervous system",
+            "autonomic nervous system",
+            "effector data",
+            "behavior data"
+          ]
+        }
+      }
+    },
+    {
+      "path_id": 3,
+      "差异化特征": {
+        "功能侧重": {
+          "描述": "侧重基于受试者神经响应测量评估和选择刺激材料引入的时空位置，优化刺激放置。",
+          "关键词_中": [
+            "刺激放置系统",
+            "刺激材料",
+            "时空位置",
+            "神经响应测量",
+            "视频流",
+            "物理位置",
+            "印刷广告",
+            "商店货架",
+            "消息",
+            "品牌图像"
+          ],
+          "关键词_英": [
+            "stimulus placement system",
+            "stimulus material",
+            "temporal and spatial locations",
+            "neuro-response measurements",
+            "video stream",
+            "physical location",
+            "print advertisement",
+            "store shelf",
+            "message",
+            "brand image"
+          ]
+        },
+        "问题侧重": {
+          "描述": "解决刺激材料在时间/空间上的最佳放置位置选择问题，以提升营销和销售效果。",
+          "关键词_中": [
+            "时间",
+            "空间位置",
+            "放置",
+            "选择",
+            "刺激材料",
+            "营销",
+            "销售材料",
+            "产品",
+            "媒体",
+            "广告"
+          ],
+          "关键词_英": [
+            "time",
+            "spatial locations",
+            "placement",
+            "selection",
+            "stimulus material",
+            "marketing",
+            "sales materials",
+            "product",
+            "media",
+            "advertising"
+          ]
+        },
+        "场景侧重": {
+          "描述": "应用于视频流、物理位置、印刷广告、商店货架、图像、广告以及实验室和公司环境等多样化场景。",
+          "关键词_中": [
+            "视频流",
+            "物理位置",
+            "印刷广告",
+            "商店货架",
+            "图像",
+            "广告",
+            "实验室",
+            "公司环境",
+            "营销",
+            "娱乐"
+          ],
+          "关键词_英": [
+            "video stream",
+            "physical location",
+            "print advertisement",
+            "store shelf",
+            "image",
+            "advertisement",
+            "laboratory",
+            "office environment",
+            "marketing",
+            "entertainment"
+          ]
+        },
+        "原理差异": {
+          "描述": "原理上通过分析暴露于不同时空位置的刺激材料的神经反应测量来评估选择，并采用分布式收集机制在实验室/公司环境采集数据。",
+          "关键词_中": [
+            "神经反应测量",
+            "时空位置",
+            "暴露",
+            "分布式数据收集",
+            "实验室",
+            "公司环境",
+            "脑电图",
+            "皮肤电流响应",
+            "心电图",
+            "眼电描记术",
+            "眼跟踪",
+            "面部情绪编码"
+          ],
+          "关键词_英": [
+            "neuro-response measurements",
+            "temporal and spatial locations",
+            "exposure",
+            "distributed data collection",
+            "laboratory",
+            "office environment",
+            "EEG",
+            "GSR",
+            "EKG",
+            "EOG",
+            "eye tracking",
+            "facial emotion encoding"
+          ]
+        }
+      }
+    }
+  ]
+}

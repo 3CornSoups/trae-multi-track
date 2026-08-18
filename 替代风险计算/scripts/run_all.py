@@ -8,7 +8,9 @@ import os
 import numpy as np
 import pandas as pd
 
-from indicators import THRESHOLD_FLAG, per_topic_indicators
+from embed_similarity import load_entity_vectors, symmetric_max_match
+from indicators import THRESHOLD_FLAG, jaccard, per_topic_indicators
+from theme_pairs import premise_pass, threshold_pass
 
 # 注（相对 brief 的一处修正）：BASE_DIR 为 scripts/ 的父目录（替代风险计算），
 # 使 ROOT 解析为 替代风险计算 而非 多轨道（多轨道 下无 outputs/ 与 config.json）。
@@ -53,9 +55,164 @@ def exp_suffix_of(suffix: str) -> str:
     return suffix.replace('_paths', '')
 
 
+def _union(patents: list, key: str) -> set:
+    s = set()
+    for p in patents:
+        s |= p.get(key) or set()
+    return s
+
+
+def _main_theme(cfg: dict) -> None:
+    """主题对版（实验三，文档口径 3.3）：45 个主题的有序对 (X→Y, X≠Y)。
+
+    对每个有序对动态计算 6 类实体集合的嵌入对称最佳匹配：
+    problem_sim（前提①，≥0.5）与 F/C/H（P_sim→H=1−P_sim）；双前提全过才进入
+    硬阈值判定（F≥0.6/C≥0.5/H≥0.3），硬阈值全过才调用 per_topic_indicators
+    计算 S 与后续指标（R）；未过前提/未达阈值的对留行带标记、S/R 空、不参与排名。
+    dom=主题 X 的中国专利、for=主题 Y 的国外专利、exposure=主题 Y 全集（K/A/V）。
+    """
+    patent = pd.read_csv(os.path.join(INTER_DIR, 'patent_route_theme.csv'),
+                         dtype={'pub': str, 'topic_code': str, 'year': 'Int64'})
+    patent['topic_code'] = patent['topic_code'].fillna('')
+    mainpath = pd.read_csv(os.path.join(INTER_DIR, 'mainpath_nodes_by_window_theme.csv'),
+                           dtype=str)
+
+    mp_nodes = {}
+    for win in cfg['windows']:
+        mp_nodes[win] = set(mainpath.loc[mainpath['window'] == win, 'pub'])
+
+    cite = pd.read_csv(NODES_CSV, usecols=['is_internal', 'in_degree'])
+    threshold = float(np.quantile(
+        cite.loc[cite['is_internal'], 'in_degree'], cfg['high_value_quantile']))
+
+    # 实体向量：复用 embed_similarity 缓存（func/scene/princ）；问题实体不在缓存内，
+    # 用同一模型补编缺失实体后拼接到全量矩阵（每次运行都按当前 KG 增量编码，不写缓存）。
+    names, vecs = load_entity_vectors()
+    problem_entities = set()
+    for s in patent['problem']:
+        problem_entities |= parse_sets(s)
+    missing = sorted(problem_entities - set(names))
+    if missing:
+        # 本机离线环境：仅用本地 HF 缓存加载 bge 模型（不访问 huggingface.co）
+        os.environ.setdefault('HF_HUB_OFFLINE', '1')
+        from sentence_transformers import SentenceTransformer
+        model = SentenceTransformer(cfg['embed_model'])
+        extra = model.encode(missing, batch_size=256, show_progress_bar=False,
+                             normalize_embeddings=True)
+        names = names + missing
+        vecs = np.vstack([vecs, extra])
+    idx = {n: i for i, n in enumerate(names)}
+
+    def set_vecs(es: set) -> np.ndarray:
+        ids = sorted(idx[n] for n in es)
+        return vecs[ids] if ids else np.zeros((0, vecs.shape[1]))
+
+    # 每主题专利列表 + 预缓存 4 类实体集合向量（避免 1980 个有序对重复编码/取行）
+    theme_patents = {}
+    theme_names = {}
+    for code, grp in patent.loc[patent['topic_code'] != ''].groupby('topic_code'):
+        rows = []
+        for r in grp.itertuples(index=False):
+            rows.append({
+                'pub': r.pub,
+                'year': r.year if pd.notna(r.year) else None,
+                'in_degree': float(r.in_degree),
+                'func': parse_sets(r.func),
+                'scene': parse_sets(r.scene),
+                'princ': parse_sets(r.princ),
+                'problem': parse_sets(r.problem),
+                'is_cn': int(r.is_cn),
+            })
+        theme_patents[code] = rows
+        theme_names[code] = grp['topic_name'].iloc[0]
+
+    vec_cache = {code: {k: set_vecs(_union(rows, k)) for k in
+                        ('problem', 'func', 'scene', 'princ')}
+                 for code, rows in theme_patents.items()}
+
+    def sim(a: np.ndarray, b: np.ndarray) -> float:
+        if a.shape[0] == 0 or b.shape[0] == 0:
+            return 0.0   # 空集合 → 该维相似度记 0（embed_similarity 同口径）
+        return symmetric_max_match(a, b)
+
+    def gated_row(x, y, F, C, H, mark):
+        return {
+            'topic_code': f'{x}→{y}',
+            'topic_name': f'{theme_names[x]}→{theme_names[y]}',
+            'n_dom': len([p for p in theme_patents[x] if p['is_cn'] == 1]),
+            'n_for': len([p for p in theme_patents[y] if p['is_cn'] == 0]),
+            'F': F, 'C': C, 'H': H, 'S': None,
+            'F_J': jaccard(_union(theme_patents[x], 'func'),
+                           _union(theme_patents[y], 'func')),
+            'C_J': jaccard(_union(theme_patents[x], 'scene'),
+                           _union(theme_patents[y], 'scene')),
+            'H_J': 1.0 - jaccard(_union(theme_patents[x], 'princ'),
+                                 _union(theme_patents[y], 'princ')),
+            'gA': None, 'gB': None, 'G': None,
+            'pA_init': None, 'pA_final': None,
+            'pB_init': None, 'pB_final': None,
+            'dPA': None, 'dPB': None, 'T': None, 'M': None,
+            'K': None, 'A': None, 'V': None, 'R': None,
+            'flags': [mark],
+        }
+
+    rows = []
+    themes = sorted(theme_patents)
+    for x in themes:
+        for y in themes:
+            if x == y:
+                continue
+            problem_sim = sim(vec_cache[x]['problem'], vec_cache[y]['problem'])
+            F = sim(vec_cache[x]['func'], vec_cache[y]['func'])
+            C = sim(vec_cache[x]['scene'], vec_cache[y]['scene'])
+            H = 1.0 - sim(vec_cache[x]['princ'], vec_cache[y]['princ'])
+            if not premise_pass(problem_sim, H):
+                rows.append(gated_row(x, y, F, C, H, '未过前提'))
+                continue
+            if not threshold_pass(F, C, H):
+                rows.append(gated_row(x, y, F, C, H, '未达阈值'))
+                continue
+            dom = [p for p in theme_patents[x] if p['is_cn'] == 1]
+            for_ = [p for p in theme_patents[y] if p['is_cn'] == 0]
+            rows.append(per_topic_indicators(
+                topic_code=f'{x}→{y}',
+                topic_name=f'{theme_names[x]}→{theme_names[y]}',
+                dom=dom, for_=for_,
+                mainpath_nodes=mp_nodes,
+                window_ends=cfg['window_ends'],
+                high_value_threshold=threshold,
+                weights=(cfg['weights']['w1'], cfg['weights']['w2'], cfg['weights']['w3']),
+                thresholds=cfg['thresholds'],
+                sigmoid_k=cfg['sigmoid_k'],
+                min_patents=cfg['min_patents'],
+                exposure=theme_patents[y],
+                fch={'F': F, 'C': C, 'H': H},
+            ))
+
+    df = pd.DataFrame(rows)
+    df['flags'] = df['flags'].map(lambda f: ';'.join(f) if f else '')
+    df['risk_rank'] = np.nan
+    eligible = df['R'].notna()
+    ranked = df.loc[eligible].sort_values('R', ascending=False)
+    df.loc[ranked.index, 'risk_rank'] = np.arange(1, len(ranked) + 1)
+
+    df = df.rename(columns=COLUMN_MAP)[COLUMN_ORDER]
+    os.makedirs(OUT_DIR, exist_ok=True)
+    out = os.path.join(OUT_DIR, '替代风险指标总表_theme.csv')
+    df.to_csv(out, index=False, encoding='utf-8-sig')
+    n_premise = int(df['标记'].str.contains('未过前提', na=False).sum())
+    n_thr = int(df['标记'].str.contains('未达阈值', na=False).sum())
+    print(f'主题 {len(themes)} 个，主题对 {len(df)}，未过前提 {n_premise}，'
+          f'未达阈值 {n_thr}，达标候选 {eligible.sum()}，'
+          f'高价值阈值(被引) {threshold:.1f}')
+    print(f'已写 {out}')
+
+
 def main() -> None:
     cfg = load_config()
     suffix = cfg.get('input_suffix', '')
+    if suffix == '_theme':
+        return _main_theme(cfg)
     patent = pd.read_csv(os.path.join(INTER_DIR, f'patent_route{suffix}.csv'),
                          dtype={'pub': str, 'topic_code': str, 'year': 'Int64'})
     patent['topic_code'] = patent['topic_code'].fillna('')

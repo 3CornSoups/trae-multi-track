@@ -7,14 +7,14 @@
 ```
 原始专利数据 → 引文网络构建 → 主路径识别（6 时间窗口） → 语义相似度拓展研究数据集
 → LLM 实体抽取与知识图谱 → BCI 相关性过滤（LLM 判定 2969 条）
-→ 技术替代风险计算（双口径 × 过滤前后四版本）
+→ 技术替代风险计算（三份实验：IPC 主题细查 / 主路径配对 / 文档口径主题对）
 ```
 
 ## 目录结构
 
 | 目录 | 内容 |
 |---|---|
-| `替代风险计算/` | 风险识别实验：README（逻辑）+ 8 脚本 + 59 测试 + 四版总表与合并报告 |
+| `替代风险计算/` | 风险识别实验：README（逻辑）+ 10 脚本 + 69 测试 + 五版总表与合并报告 |
 | `主路径识别/` | 6 窗口主路径识别结果与报告 |
 | `路径概括与拓展/` | 原生路径 → 3 条跨窗口技术路线的概括 |
 | `语义相似度匹配/` | 主路径相似专利拓展（bge 预筛 + LLM 精判） |
@@ -28,19 +28,21 @@
 
 ```powershell
 cd 替代风险计算
-python -m pytest tests -v          # 59 个测试全绿
+python -m pytest tests -v          # 69 个测试全绿
 python scripts/prepare.py          # 中间表（大文件依赖见 数据清单.md）
 python scripts/embed_similarity.py # 实体嵌入相似度（bge-small-zh-v1.5）
+python scripts/theme_discovery.py  # 实验三：LLM 主题标签+归并聚类（需 DEEPSEEK_API_KEY）
+python scripts/theme_pairs.py      # 实验三：主题版专利表（KG 问题实体 + 主路径拷贝）
 python scripts/run_all.py          # 指标总表
 python scripts/generate_report.py  # 报告
 ```
 
-版本切换：`config.json` 的 `input_suffix` = `""` / `"_filtered"` / `"_paths"` / `"_paths_filtered"`。
-LLM 相关性判定需 `DEEPSEEK_API_KEY` 环境变量（不落盘）。
+版本切换：`config.json` 的 `input_suffix` = `""` / `"_filtered"` / `"_paths"` / `"_paths_filtered"` / `"_theme"`。
+LLM 相关性判定与主题凝练需 `DEEPSEEK_API_KEY` 环境变量（不落盘）。
 
 ## 方法要点
 
-**R = S × (M + V) ÷ 2**：S=可替代性（功能/场景相似度 + 原理差异，bge 嵌入对称最佳匹配）、M=替代成熟度（增长优势 + 主路径地位转移）、V=安全暴露度（国外核心专利控制度 + 国内自主能力缺口）。国内外=公开国家；软阈值口径；高价值=被引前 10%（44 次）；sigmoid 归一。
+**R = S × (M + V) ÷ 2**：S=可替代性（功能/场景相似度 + 原理差异，bge 嵌入对称最佳匹配）、M=替代成熟度（增长优势 + 主路径地位转移）、V=安全暴露度（国外核心专利控制度 + 国内自主能力缺口）。国内外=公开国家；软阈值口径（实验一/二）；实验三按文档口径增加替代候选双前提（问题相似度≥0.5 且 H≥0.3）+ 硬阈值（F≥0.6/C≥0.5/H≥0.3 全过才计算）；高价值=被引前 10%（44 次）；sigmoid 归一。
 
 大文件（原始 xlsx、GraphML、嵌入缓存等）不随仓库分发，清单与再生方式见 `数据清单.md`。
 

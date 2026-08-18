@@ -18,6 +18,27 @@ def _fmt(v):
     return '—' if pd.isna(v) else f'{v:.4f}'
 
 
+def _theme_summary(df: pd.DataFrame) -> str:
+    ranked = df.loc[df['风险排名'].notna()].sort_values('风险排名')
+    n_all = len(df)
+    n_premise = int((df['标记'].fillna('').str.contains('未过前提')).sum())
+    n_thr = int((df['标记'].fillna('').str.contains('未达阈值')).sum())
+    n_ranked = len(ranked)
+    lines = ['## 实验三：文档要求版（要素凝练主题 + 替代候选双前提 + 硬阈值）\n']
+    lines.append('- 口径：按《替代风险计算研究方案.md》第三步——从知识要素凝练技术主题'
+                 '（LLM 逐条标签 + 归并，N 个主题）；替代候选须同时满足'
+                 '"解决同一类问题（问题相似度≥0.5）"与"原理明显不同（H≥0.3）"两个前提；'
+                 f'仅 F≥0.6/C≥0.5/H≥0.3 全过的路线对才计算综合得分（硬阈值）。')
+    lines.append(f'- 结果：{n_all} 个主题对中，{n_premise} 对未过双前提、'
+                 f'{n_thr} 对未达阈值、{n_ranked} 对为达标替代候选并参与风险排名。')
+    if n_ranked:
+        top3 = '、'.join(f'{r["主题码"]}(R={r["R_AB"]:.3f})' for _, r in ranked.head(3).iterrows())
+        lines.append(f'- 达标候选 Top-3：{top3}。')
+    else:
+        lines.append('- 无达标候选：硬阈值下没有路线对同时满足三条件（详见报告解读与附录）。')
+    return '\n'.join(lines)
+
+
 def _paths_summary(df: pd.DataFrame, filtered: bool = False) -> str:
     """路线版（6 个跨路线配对）结论摘要：先给结论，再说方法。
 
@@ -104,6 +125,8 @@ def render_report(df: pd.DataFrame, params: dict, top_n: int = 20,
     thr_fail = df['标记'].astype(str).str.contains(THRESHOLD_FLAG, na=False).sum()
     no_hv = df['标记'].astype(str).str.contains('无高价值专利', na=False).sum()
     qualified = (~df['标记'].astype(str).str.contains(THRESHOLD_FLAG, na=False)).sum()
+    n_premise = df['标记'].astype(str).str.contains('未过前提', na=False).sum()
+    n_thr = df['标记'].astype(str).str.contains('未达阈值', na=False).sum()
 
     w = params['weights']
     wsum = w['w1'] + w['w2'] + w['w3']
@@ -117,11 +140,19 @@ def render_report(df: pd.DataFrame, params: dict, top_n: int = 20,
         lines.append(_paths_summary(df, filtered=filtered))
         lines.append(render_paths_overview(
             level=2, title='技术路线全景：全部主路径的技术主线'))
+    elif caliber == 'theme':
+        lines.append(_theme_summary(df))
     lines.append('## 一、方法与公式\n')
     if caliber == 'paths':
         lines.append('- 配对口径：跨路线替代候选——国内路线 X 与国外路线 Y（X≠Y，共 6 个有序'
                      '配对 X→Y）；3 条路线（P1/P2/P3）由每窗口 15-30 条原生主路径'
                      'LLM 概括合并而来；K/A/V 按 B 路线（Y）全集计算（文档口径）。')
+    elif caliber == 'theme':
+        n_themes = len({c for code in df['主题码'] for c in str(code).split('→')})
+        lines.append('- 配对口径：知识要素凝练技术主题（LLM 逐条标签 + 归并聚类）的国内'
+                     f'（公开国家=中国）与国外专利子集；{n_themes} 个主题的有序主题对'
+                     f'（X→Y，X≠Y，共 {n_themes}×{n_themes - 1} 对），dom=主题 X 的中国专利、'
+                     'for=主题 Y 的国外专利、K/A/V 按主题 Y 全集计算（文档口径）。')
     else:
         lines.append('- 配对口径：同一 IPC 大组级技术主题的国内（公开国家=中国）与国外专利子集；'
                      '147 个主题逐一计算。')
@@ -131,6 +162,10 @@ def render_report(df: pd.DataFrame, params: dict, top_n: int = 20,
                  '相似度记 0；H=1−P）；F_J/C_J/H_J 为 Jaccard 字符串口径对照列。')
     lines.append(f'- 权重 w1:w2:w3 = {w["w1"]}:{w["w2"]}:{w["w3"]}（归一化后 '
                  f'{w["w1"]/wsum:.3f}:{w["w2"]/wsum:.3f}:{w["w3"]/wsum:.3f}）；'
+                 '替代候选双前提：问题实体集合相似度≥0.5（解决同一类技术问题）且 '
+                 'H≥0.3（原理明显不同）；硬阈值 F≥0.6、C≥0.5、H≥0.3 全过才计算'
+                 '综合得分与风险（文档口径）；未过前提/未达阈值的对留表带标记、'
+                 'S/R 空、不参与排名。' if caliber == 'theme' else
                  '阈值 F≥0.6、C≥0.5、H≥0.3 为"达标"参考标记（软阈值口径，'
                  '用户 2026-08-17 拍板）；S 对全部主题计算，未达标主题照常参与排名。')
     lines.append('- 增长优势：g = slope[ln(1+N_t)]（6 时点等间隔线性回归）；'
@@ -175,13 +210,23 @@ def render_report(df: pd.DataFrame, params: dict, top_n: int = 20,
         lines.append('- 被排除专利清单见 `outputs/intermediate/excluded_patents.csv`'
                      '（含判定类别与理由，可复核）。\n')
     lines.append('## 三、总体结果\n')
-    lines.append(f'- 技术主题总数：{total_topics}；参与排名（R 可计算）：{ranked_n}')
-    lines.append(f'- 达标主题（F≥0.6 且 C≥0.5 且 H≥0.3）：{qualified}')
-    lines.append(f'- 未参与排名（R 不可计算，均因无高价值专利）：{no_hv}')
-    lines.append(f'- 标记统计（可叠加；"未达标"与"样本不足"不排除排名）：'
-                 f'样本不足 {sample_short}、未达标 {thr_fail}、无高价值专利 {no_hv}\n')
+    if caliber == 'theme':
+        lines.append(f'- 技术主题数：{n_themes}；有序主题对数（X→Y，X≠Y）：{total_topics}')
+        lines.append(f'- 未过双前提（问题相似度<0.5 或 H<0.3）：{n_premise}')
+        lines.append(f'- 未达硬阈值（F<0.6 或 C<0.5 或 H<0.3）：{n_thr}')
+        lines.append(f'- 达标替代候选并参与排名（R 可计算）：{ranked_n}')
+        lines.append(f'- 标记统计（可叠加）：样本不足 {sample_short}、'
+                     f'无高价值专利 {no_hv}\n')
+    else:
+        lines.append(f'- 技术主题总数：{total_topics}；参与排名（R 可计算）：{ranked_n}')
+        lines.append(f'- 达标主题（F≥0.6 且 C≥0.5 且 H≥0.3）：{qualified}')
+        lines.append(f'- 未参与排名（R 不可计算，均因无高价值专利）：{no_hv}')
+        lines.append(f'- 标记统计（可叠加；"未达标"与"样本不足"不排除排名）：'
+                     f'样本不足 {sample_short}、未达标 {thr_fail}、无高价值专利 {no_hv}\n')
     if caliber == 'paths':
         lines.append(f'## 四、Top-{top_n} 风险技术主题（本版全部 6 个路线对）\n')
+    elif caliber == 'theme':
+        lines.append(f'## 四、Top-{top_n} 风险技术主题对（达标替代候选）\n')
     else:
         lines.append(f'## 四、Top-{top_n} 风险技术主题\n')
     if len(top):
@@ -195,11 +240,17 @@ def render_report(df: pd.DataFrame, params: dict, top_n: int = 20,
                          f'| {_fmt(r["V_B"])} | {_fmt(r["R_AB"])} | '
                          f'{"" if pd.isna(r["标记"]) else r["标记"]} |')
     else:
-        lines.append('（无主题满足排名条件）')
+        empty_msg = '（无达标替代候选；见文末软阈值参考排名附录）' if caliber == 'theme' \
+            else '（无主题满足排名条件）'
+        lines.append(empty_msg)
     lines.append('')
-    lines.append('## 达标主题清单（标记不含"未达标"；最多 10 行）')
-    qual = (df.loc[~df['标记'].astype(str).str.contains(THRESHOLD_FLAG, na=False)]
-            .sort_values('风险排名', na_position='last').head(10))
+    if caliber == 'theme':
+        lines.append('## 达标替代候选清单（硬阈值全过；最多 10 行）')
+        qual = ranked.head(10)   # 硬阈值口径：达标清单=参与排名的替代候选
+    else:
+        lines.append('## 达标主题清单（标记不含"未达标"；最多 10 行）')
+        qual = (df.loc[~df['标记'].astype(str).str.contains(THRESHOLD_FLAG, na=False)]
+                .sort_values('风险排名', na_position='last').head(10))
     if len(qual):
         lines.append('| 主题码 | 主题名 | F_AB | C_AB | H_AB | F_J | R_AB | 风险排名 |')
         lines.append('|---|---|---|---|---|---|---|---|')
@@ -212,15 +263,16 @@ def render_report(df: pd.DataFrame, params: dict, top_n: int = 20,
         lines.append('（无）')
     lines.append('')
     lines.append('## 解读\n')
+    unit = '主题对' if caliber == 'theme' else '主题'
     n_dom_zero = int((top['n_国内'] == 0).sum())
     n_small = int(top['标记'].astype(str).str.contains('样本不足', na=False).sum())
-    lines.append(f'- Top-{top_n} 中 {n_dom_zero} 个主题国内专利数为 0、{n_small} 个带"样本不足"标记：'
+    lines.append(f'- Top-{top_n} 中 {n_dom_zero} 个{unit}国内专利数为 0、{n_small} 个带"样本不足"标记：'
                  '靠前名次主要反映国外专利主导（V_B 趋近 1、A_B≈0）下的国内缺位风险，'
                  '而非对既有国内技术路线的替代动态。')
     f_j_pos = int((df['F_J'] > 0).sum())
     lines.append(f'- 嵌入口径下 F_AB 均值 {df["F_AB"].dropna().mean():.3f}、'
                  f'C_AB 均值 {df["C_AB"].dropna().mean():.3f}；Jaccard 对照 F_J>0 仅 '
-                 f'{f_j_pos} 个主题——字符串相等对同义异形（"RF信号传输能量" vs "RF能量传输"）'
+                 f'{f_j_pos} 个{unit}——字符串相等对同义异形（"RF信号传输能量" vs "RF能量传输"）'
                  '零容错，两种口径的差异为方法学发现。')
     if caliber == 'ipc':
         lines.append('- Top 主题中 G06F17（数据处理）、G06Q30（商业交易系统）等非典型 BCI 主题'
@@ -229,6 +281,32 @@ def render_report(df: pd.DataFrame, params: dict, top_n: int = 20,
         if domain_stats:
             lines.append('- 过滤后仍居首的 G06Q30（商业交易系统）的保留专利均为脑电广告/神经营销类'
                          '边缘应用（属纳入口径），并非管道错误。')
+    elif caliber == 'theme':
+        n_f_fail = int((df['F_AB'] < params['thresholds']['F']).sum())
+        n_c_fail = int((df['C_AB'] < params['thresholds']['C']).sum())
+        n_h_fail = int((df['H_AB'] < params['thresholds']['H']).sum())
+        lines.append(f'- 硬阈值三条件的全表统计：F<0.6 的 {n_f_fail} 对、C<0.5 的 '
+                     f'{n_c_fail} 对、H<0.3 的 {n_h_fail} 对（含未过前提的对，'
+                     '其 F/C/H 亦照填）；与"未过双前提/未达阈值"两个标记合计对照，'
+                     '可定位主要门槛。')
+        n_no_r = int((df['风险排名'].isna()
+                      & ~df['标记'].astype(str).str.contains(
+                          '未过前提|未达阈值', na=False)).sum())
+        if n_no_r:
+            lines.append(f'- 另有 {n_no_r} 对通过双前提与硬阈值但 R 不可计算'
+                         '（Y 主题无高价值专利），留表不参与排名——'
+                         '与实验一/二"无高价值专利"的处理一致。')
+        if len(ranked):
+            s_min, s_max = ranked['S_AB'].min(), ranked['S_AB'].max()
+            m_min, m_max = ranked['M_AB'].min(), ranked['M_AB'].max()
+            lines.append(f'- 达标候选的 S 落在 {s_min:.3f}~{s_max:.3f}、'
+                         f'M 落在 {m_min:.3f}~{m_max:.3f}：风险排序由可替代性'
+                         '（能不能替代）与替代成熟度（正在发生）共同决定，'
+                         '看 Top 表可逐项归因。')
+        else:
+            lines.append('- 无达标替代候选：硬阈值与双前提联合判定下没有路线对同时满足'
+                         '三条件——这是文档口径的如实结果，不代表各对之间没有风险差异'
+                         '（见文末"软阈值参考排名"附录，非主口径）。')
     else:
         n_qual = (~df['标记'].astype(str).str.contains(THRESHOLD_FLAG, na=False)).sum()
         # 修正记录（数据驱动，2026-08-18）：实测 6 对 F/C 全部达阈值，未达标
@@ -250,34 +328,42 @@ def render_report(df: pd.DataFrame, params: dict, top_n: int = 20,
         lines.append('- 6 个配对上的 S×M 中位数分级粒度粗，仅供示意，不宜作统计结论。')
     lines.append('')
     lines.append('## 五、S×M 态势分级\n')
-    s_med = ranked['S_AB'].median()
-    m_med = ranked['M_AB'].median()
-    s_hi = ranked['S_AB'] > s_med
-    m_hi = ranked['M_AB'] > m_med
-    lines.append(f'- 分级阈值（中位数）：S={s_med:.4f}，M={m_med:.4f}')
-    lines.append(f'- S 高 M 低（有替代能力、尚未成势）：{(s_hi & ~m_hi).sum()} 个主题')
-    lines.append(f'- S 高 M 高（替代具有现实可能性）：{(s_hi & m_hi).sum()} 个主题')
-    lines.append(f'- S 低 M 高（仅国外新路线扩张）：{(~s_hi & m_hi).sum()} 个主题')
-    lines.append(f'- S 低 M 低：{(~s_hi & ~m_hi).sum()} 个主题\n')
+    if len(ranked) == 0:
+        lines.append('（无达标替代候选参与排名，分级不可用；见文末软阈值参考排名附录）\n')
+    else:
+        s_med = ranked['S_AB'].median()
+        m_med = ranked['M_AB'].median()
+        s_hi = ranked['S_AB'] > s_med
+        m_hi = ranked['M_AB'] > m_med
+        lines.append(f'- 分级阈值（中位数）：S={s_med:.4f}，M={m_med:.4f}')
+        lines.append(f'- S 高 M 低（有替代能力、尚未成势）：{(s_hi & ~m_hi).sum()} 个主题')
+        lines.append(f'- S 高 M 高（替代具有现实可能性）：{(s_hi & m_hi).sum()} 个主题')
+        lines.append(f'- S 低 M 高（仅国外新路线扩张）：{(~s_hi & m_hi).sum()} 个主题')
+        lines.append(f'- S 低 M 低：{(~s_hi & ~m_hi).sum()} 个主题\n')
     lines.append('## 六、数据质量与局限\n')
     lines.append('1. 主路径各窗口节点仅 21~43 个（pre2000 为 182），p_A,t 稀疏，'
                  'T_AB 对少量节点的增减敏感，解读需谨慎。')
     lines.append('2. 公开国家 ≠ 最终控制权（申请人国籍覆盖仅 57%，未采用）；'
                  'WO/EP 等国际公开按国外处理。')
-    kb_note = '（路线版按 B 路线全集计算）' if caliber == 'paths' else ''
+    if caliber == 'paths':
+        kb_note = '（路线版按 B 路线全集计算）'
+    elif caliber == 'theme':
+        kb_note = '（主题对版按 Y 主题全集计算，文档口径）'
+    else:
+        kb_note = ''
     lines.append('3. K_B 按主题全集（国内+国外）计算——严格按文档"i∈B"只取国外子集则 '
                  f'K_B 恒为 1，无信息量{kb_note}。')
     n_zero_fj = int((df['F_J'] == 0).sum())
     lines.append(f'4. Jaccard 对照列（F_J/C_J/H_J）显著低于嵌入口径：字符串口径对同义异形'
-                 f'零容错，导致 {n_zero_fj} 个主题零交集（占总主题 '
+                 f'零容错，导致 {n_zero_fj} 个{unit}零交集（占总{unit} '
                  f'{n_zero_fj/total_topics:.0%}）；嵌入对称最佳匹配对长尾噪声短语较宽容，'
                  '个别主题的相似度可能被少数通用词（如"信号处理"）抬高。')
     n_zero_fcp = int((df['F_AB'] == 0).sum())
     floor_n = int((ranked['S_AB'] == 1/3).sum())
     lines.append('5. S_AB 存在缺失数据地板：任一侧实体集为空则该维相似度记 0（空集合→0 '
-                 f'的约定）；真实数据下 {n_zero_fcp} 个主题 F=C=P=0、H=1，S_AB 恰为 1/3；'
-                 f'参与排名的 {ranked_n} 个主题中 {floor_n} 个 S_AB 位于该地板——S×M 分级的'
-                 f'"S 低"档对这 {floor_n} 个主题是"相似度不可测"而非"测得低"，解读时不可当作'
+                 f'的约定）；真实数据下 {n_zero_fcp} 个{unit} F=C=P=0、H=1，S_AB 恰为 1/3；'
+                 f'参与排名的 {ranked_n} 个{unit}中 {floor_n} 个 S_AB 位于该地板——S×M 分级的'
+                 f'"S 低"档对这 {floor_n} 个{unit}是"相似度不可测"而非"测得低"，解读时不可当作'
                  '有实义的替代能力比较。')
     if caliber == 'ipc':
         lines.append('6. 40 个无有效主IPC 的专利未进任何主题；13 个无摘要专利不在 KG 中，'
@@ -302,6 +388,24 @@ def render_report(df: pd.DataFrame, params: dict, top_n: int = 20,
         lines.append(f'8. 本报告全部数字基于 2026-08-18 运行数据'
                      f'{patent_note}引文网络内部节点 31899 个）；数据更新后请重跑 '
                      'prepare→embed_similarity→run_all→generate_report。')
+    # 主口径无达标候选时：软阈值参考排名附录（非主口径，仅供相对比较）
+    if caliber == 'theme' and len(ranked) == 0:
+        lines.append('')
+        lines.append('## 附录：软阈值参考排名（非主口径）\n')
+        lines.append('- 主口径（硬阈值）下无达标替代候选。以下把未过双前提/未达阈值的'
+                     f'全部主题对按 S 参考值降序列表——S 参考 = w1·F + w2·C + w3·H '
+                     f'（权重 {w["w1"]}:{w["w2"]}:{w["w3"]}，F/C/H 照常计算）——'
+                     '仅供相对比较与解读，不构成主口径风险排名。\n')
+        soft = df.loc[df['风险排名'].isna()].copy()
+        soft['S_ref'] = (w['w1'] * soft['F_AB'] + w['w2'] * soft['C_AB']
+                         + w['w3'] * soft['H_AB']) / wsum
+        soft = soft.sort_values('S_ref', ascending=False)
+        lines.append('| 参考序 | 主题码 | S_ref | F_AB | C_AB | H_AB | 标记 |')
+        lines.append('|---|---|---|---|---|---|---|')
+        for i, (_, r) in enumerate(soft.head(20).iterrows(), 1):
+            lines.append(f'| {i} | {r["主题码"]} | {r["S_ref"]:.4f} | '
+                         f'{_fmt(r["F_AB"])} | {_fmt(r["C_AB"])} | {_fmt(r["H_AB"])} | '
+                         f'{"" if pd.isna(r["标记"]) else r["标记"]} |')
     return '\n'.join(lines)
 
 
@@ -311,7 +415,8 @@ def main() -> None:
     suffix = cfg.get('input_suffix', '')
     df = pd.read_csv(os.path.join(ROOT, 'outputs', f'替代风险指标总表{suffix}.csv'),
                      dtype={'主题码': str})
-    caliber = 'paths' if suffix in ('_paths', '_paths_filtered') else 'ipc'
+    caliber = ('theme' if suffix == '_theme'
+               else 'paths' if suffix in ('_paths', '_paths_filtered') else 'ipc')
     # 过滤版（suffix 以 '_filtered' 结尾，即 '_filtered' 与 '_paths_filtered'）：
     # 读相关性过滤统计，供研究域界定节（ipc 版）与尾注专利数参数化
     # （patent_n=保留数，未过滤版 None→2863）
@@ -321,7 +426,14 @@ def main() -> None:
         stats = pd.read_csv(os.path.join(ROOT, 'outputs', 'intermediate',
                                          'relevance_filter_stats.csv'))
         domain_stats = stats.iloc[0].to_dict()
-    patent_n = domain_stats.get('patent_kept') if domain_stats else None
+    if suffix == '_theme':
+        # 主题版尾注：实际进入主题分组的研究数据集专利数（13 条无主题专利除外）
+        pt = pd.read_csv(os.path.join(ROOT, 'outputs', 'intermediate',
+                                      'patent_route_theme.csv'),
+                         usecols=['topic_code'], dtype=str)
+        patent_n = int((pt['topic_code'].notna() & (pt['topic_code'] != '')).sum())
+    else:
+        patent_n = domain_stats.get('patent_kept') if domain_stats else None
     md = render_report(df, cfg, caliber=caliber, domain_stats=domain_stats,
                        patent_n=patent_n, filtered=filtered)
     out = os.path.join(ROOT, 'outputs', f'替代风险报告{suffix}.md')
