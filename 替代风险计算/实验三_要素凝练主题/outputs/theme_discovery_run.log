@@ -1,0 +1,19 @@
+[load] 250 tasks | providers=deepseek | concurrency=10
+[resume] skip 250, run 0
+[done] nothing to run
+[load] 44 tasks | providers=deepseek | concurrency=10
+[resume] skip 44, run 0
+[done] nothing to run
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+tag tasks: 250
+tags parsed: 2493（唯一 2152）
+merge batches: 44
+level2 reps: 1125
+Loading weights:   0%|          | 0/71 [00:00<?, ?it/s]Loading weights: 100%|██████████| 71/71 [00:00<00:00, 10834.84it/s]
+[load] 5 tasks | providers=deepseek | concurrency=10
+[resume] skip 0, run 5
+[progress] 5/5 (failed 0)
+[done] 5 completed, 0 failed, 1.8s -> D:\论文和代码项目\论文\TRAE\多轨道\替代风险计算\outputs\intermediate\relevance\theme_name_results.jsonl
+name tasks: 5（45 个簇）
+themes: 45
+patent_theme 已写

@@ -78,32 +78,54 @@
 | **配对过滤后** | **6 对** | **国外P1→国内P2（0.442）** | **1（P1→P2）** |
 | **主题对（文档口径）** | **45 主题 / 1980 对 / 1580 排名** | **C31→C8（0.508）** | **1580** |
 
-详见 `outputs/风险分析报告.md` 与 `outputs/替代风险报告_theme.md`。
+详见 `风险分析报告.md`（项目根）与 `实验三_要素凝练主题/outputs/替代风险报告_theme.md`。
+
+## 目录结构
+
+```
+替代风险计算/
+├── README.md              本文件：三实验导航 + 目录说明
+├── 风险分析报告.md         合并版结论报告（三实验、五版本对比 + 解读）
+├── config.json            共用配置（input_suffix 切版本，所有脚本读 ROOT=项目根）
+├── outputs/intermediate/  中间数据层（脚本 INTER_DIR 写这里）
+├── 共用/
+│   ├── README.md          数据流 + 脚本职责 + 复现/测试说明
+│   ├── scripts/           7 个共用流水线脚本（prepare/embed/indicators/filter/run_all/report/全景）
+│   └── tests/             10 个测试文件（69 用例）+ conftest.py（统一 sys.path 注入）
+├── 实验一_IPC主题排查/     README + outputs（总表/报告 × 全量/过滤 2 版本）
+├── 实验二_主路径配对/      README + scripts/path_routes.py + outputs（总表/报告 × 2 + 全景）
+└── 实验三_要素凝练主题/    README + scripts（theme_discovery/theme_pairs）+ outputs（总表/报告）
+```
 
 ## 复现
 
 ```powershell
-python -m pytest tests -v           # 69 个测试
-python scripts/prepare.py           # 中间表（需本地原始数据，见仓库根 数据清单.md）
-python scripts/embed_similarity.py  # 实体嵌入相似度
-python scripts/theme_discovery.py   # 实验三：LLM 主题标签+归并聚类（需 DEEPSEEK_API_KEY）
-python scripts/theme_pairs.py       # 实验三：主题版专利表（KG 问题实体 + 主路径拷贝）
-python scripts/run_all.py           # 指标总表（离线环境自动使用本地 HF 缓存）
-python scripts/generate_report.py   # 报告
+cd 替代风险计算            # 项目根（脚本 ROOT 均解析到项目根，见 共用/README.md）
+python -m pytest 共用/tests -q          # 69 个测试（或 cd 共用/tests 后 python -m pytest -q）
+python 共用/scripts/prepare.py           # 中间表（需本地原始数据，见仓库根 数据清单.md）
+python 共用/scripts/embed_similarity.py  # 实体嵌入相似度
+python 实验三_要素凝练主题/scripts/theme_discovery.py  # 实验三：LLM 主题标签+归并聚类（需 DEEPSEEK_API_KEY）
+python 实验三_要素凝练主题/scripts/theme_pairs.py      # 实验三：主题版专利表（KG 问题实体 + 主路径拷贝）
+python 共用/scripts/run_all.py           # 指标总表（离线环境自动使用本地 HF 缓存）
+python 共用/scripts/generate_report.py   # 报告
 ```
 
 版本切换：`config.json` 的 `input_suffix` = `""`（IPC 全量）/ `"_filtered"`（IPC 过滤）/ `"_paths"`（配对全量）/ `"_paths_filtered"`（配对过滤）/ `"_theme"`（主题对，文档口径）。
-LLM 相关性判定：`python scripts/filter_relevance.py`（需 DEEPSEEK_API_KEY 环境变量，不落盘）。
+LLM 相关性判定：`python 共用/scripts/filter_relevance.py`（需 DEEPSEEK_API_KEY 环境变量，不落盘）。
+各实验前置脚本与命令见对应实验 README；重跑产物默认落在根 `outputs/`（已归档副本在各实验 outputs/）。
 
 ## 文件索引
 
 | 文件 | 内容 |
 |---|---|
-| `outputs/风险分析报告.md` | 合并版结论报告（三份实验、五版本对比 + 解读） |
-| `outputs/替代风险报告_theme.md` | 主题对版完整报告（实验三章节 + 硬阈值口径） |
-| `outputs/替代风险指标总表*.csv` ×5 | 五版本全部指标（IPC 147/133 行、配对 6 行、主题对 1980 行 × 29 列，问题相似度仅主题版有值） |
-| `outputs/主路径全景概况.md` | 全部 163 条主路径的技术主线 |
+| `风险分析报告.md` | 合并版结论报告（三份实验、五版本对比 + 解读） |
+| `实验三_要素凝练主题/outputs/替代风险报告_theme.md` | 主题对版完整报告（实验三章节 + 硬阈值口径） |
+| `实验一_IPC主题排查/outputs/替代风险指标总表{,_filtered}.csv` | IPC 全量/过滤版指标（147/133 行） |
+| `实验二_主路径配对/outputs/替代风险指标总表_paths{,_filtered}.csv` | 配对全量/过滤版指标（6 行） |
+| `实验二_主路径配对/outputs/主路径全景概况.md` | 全部 163 条主路径的技术主线 |
+| `实验三_要素凝练主题/outputs/替代风险指标总表_theme.csv` | 主题对版指标（1980 行 × 29 列，问题相似度仅此版有值） |
 | `outputs/intermediate/patent_theme.csv` | 主题凝练结果（2493 条专利 → 45 主题） |
 | `outputs/intermediate/patent_route_theme.csv` | 主题版专利表（含 KG 问题实体列） |
-| `scripts/` | 10 个流水线脚本（prepare → embed → run_all → report + 过滤版/路径版/主题版/全景版） |
-| `tests/` | 69 个测试（公式数学、口径、装配链全部锁定） |
+| `共用/scripts/` | 7 个共用流水线脚本（prepare → embed → run_all → report + 过滤/全景） |
+| `实验二_主路径配对/scripts/`、`实验三_要素凝练主题/scripts/` | 实验专属脚本（path_routes / theme_discovery+theme_pairs） |
+| `共用/tests/` | 69 个测试（公式数学、口径、装配链全部锁定）+ conftest.py |
