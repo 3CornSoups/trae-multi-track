@@ -30,13 +30,16 @@ def _theme_summary(df: pd.DataFrame) -> str:
     n_themes = len(set(chain.from_iterable(code.split('→') for code in df['主题码'])))
     lines = ['## 实验三：文档要求版（要素凝练主题 + 替代候选双前提 + 硬阈值）\n']
     lines.append('- 口径：按《替代风险计算研究方案.md》第三步——从知识要素凝练技术主题'
-                 f'（LLM 逐条标签 + 归并，{n_themes} 个主题）；替代候选须同时满足'
+                 f'（LLM 逐条标签 + 归并，{n_themes} 个主题）；主题码 "X→Y" 表示'
+                 '"国外 Y 替代 国内 X"（X=被替代侧/国内，Y=替代侧/国外）；替代候选须同时满足'
                  '"解决同一类问题（问题相似度≥0.5）"与"原理明显不同（H≥0.3）"两个前提；'
                  f'仅 F≥0.6/C≥0.5/H≥0.3 全过的路线对才计算综合得分（硬阈值）。')
     lines.append(f'- 结果：{n_all} 个主题对中，{n_premise} 对未过双前提、'
                  f'{n_thr} 对未达阈值、{n_ranked} 对为达标替代候选并参与风险排名。')
     if n_ranked:
-        top3 = '、'.join(f'{r["主题码"]}(R={r["R_AB"]:.3f})' for _, r in ranked.head(3).iterrows())
+        top3 = '、'.join(f'国外{code.split("→")[1]}→国内{code.split("→")[0]}(R={r["R_AB"]:.3f})'
+                         for _, r in ranked.head(3).iterrows()
+                         for code in [r['主题码']])
         lines.append(f'- 达标候选 Top-3：{top3}。')
     else:
         lines.append('- 无达标候选：硬阈值下没有路线对同时满足三条件（详见报告解读与附录）。')
