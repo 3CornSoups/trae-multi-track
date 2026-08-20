@@ -1,0 +1,33 @@
+{
+  "weights": {
+    "w1": 1,
+    "w2": 1,
+    "w3": 1
+  },
+  "thresholds": {
+    "F": 0.6,
+    "C": 0.5,
+    "H": 0.3
+  },
+  "sigmoid_k": 2.0,
+  "windows": [
+    "pre2000",
+    "2000_2005",
+    "2000_2010",
+    "2000_2015",
+    "2000_2020",
+    "2000_2026"
+  ],
+  "window_ends": [
+    1999,
+    2005,
+    2010,
+    2015,
+    2020,
+    2026
+  ],
+  "min_patents": 3,
+  "high_value_quantile": 0.9,
+  "embed_model": "BAAI/bge-small-zh-v1.5",
+  "input_suffix": ""
+}
