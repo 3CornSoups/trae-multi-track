@@ -20,7 +20,10 @@ KG_ZIP = os.path.join(ROOT, '..', '实体抽取，知识图谱构建', 'bci知�
 
 PREMISE_PROBLEM_SIM = 0.5   # 前提①：解决同一类技术问题（问题实体集合相似度）
 PREMISE_H = 0.3             # 前提②：技术原理存在明显差异
-TH_F, TH_C, TH_H = 0.6, 0.5, 0.3   # 硬阈值（仅达标对计算综合得分）
+# 硬阈值（仅达标对计算综合得分）；F 按导师建议由 0.6 放宽为 0.5
+TH_F, TH_C, TH_H = 0.5, 0.5, 0.3
+# 最终风险加权幂：R = S^α × ((M+V)/2)^β（导师给定 α=0.6, β=0.4）
+RISK_S_POWER, RISK_MV_POWER = 0.6, 0.4
 
 
 def premise_pass(problem_sim: float, H: float) -> bool:

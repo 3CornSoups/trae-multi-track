@@ -19,7 +19,10 @@ def _fmt(v):
     return '—' if pd.isna(v) else f'{v:.4f}'
 
 
-def _theme_summary(df: pd.DataFrame) -> str:
+def _theme_summary(df: pd.DataFrame, thresholds: dict | None = None) -> str:
+    """生成实验三报告开头摘要；thresholds 默认 F/C/H=0.5/0.5/0.3。"""
+    th = thresholds or {'F': 0.5, 'C': 0.5, 'H': 0.3}
+    tf, tc, thh = th['F'], th['C'], th['H']
     ranked = df.loc[df['风险排名'].notna()].sort_values('风险排名')
     n_all = len(df)
     n_premise = int((df['标记'].fillna('').str.contains('未过前提')).sum())
@@ -33,7 +36,7 @@ def _theme_summary(df: pd.DataFrame) -> str:
                  f'（LLM 逐条标签 + 归并，{n_themes} 个主题）；主题码 "X→Y" 表示'
                  '"国外 Y 替代 国内 X"（X=被替代侧/国内，Y=替代侧/国外）；替代候选须同时满足'
                  '"解决同一类问题（问题相似度≥0.5）"与"原理明显不同（H≥0.3）"两个前提；'
-                 f'仅 F≥0.6/C≥0.5/H≥0.3 全过的路线对才计算综合得分（硬阈值）。')
+                 f'仅 F≥{tf}/C≥{tc}/H≥{thh} 全过的路线对才计算综合得分（硬阈值）。')
     lines.append(f'- 结果：{n_all} 个主题对中，{n_premise} 对未过双前提、'
                  f'{n_thr} 对未达阈值、{n_ranked} 对为达标替代候选并参与风险排名。')
     if n_ranked:
@@ -148,7 +151,7 @@ def render_report(df: pd.DataFrame, params: dict, top_n: int = 20,
         lines.append(render_paths_overview(
             level=2, title='技术路线全景：全部主路径的技术主线'))
     elif caliber == 'theme':
-        lines.append(_theme_summary(df))
+        lines.append(_theme_summary(df, thresholds=params['thresholds']))
     lines.append('## 一、方法与公式\n')
     if caliber == 'paths':
         lines.append('- 配对口径：跨路线替代候选——国内路线 X 与国外路线 Y（X≠Y，共 6 个有序'
@@ -170,7 +173,8 @@ def render_report(df: pd.DataFrame, params: dict, top_n: int = 20,
     lines.append(f'- 权重 w1:w2:w3 = {w["w1"]}:{w["w2"]}:{w["w3"]}（归一化后 '
                  f'{w["w1"]/wsum:.3f}:{w["w2"]/wsum:.3f}:{w["w3"]/wsum:.3f}）；'
                  '替代候选双前提：问题实体集合相似度≥0.5（解决同一类技术问题）且 '
-                 'H≥0.3（原理明显不同）；硬阈值 F≥0.6、C≥0.5、H≥0.3 全过才计算'
+                 f'H≥0.3（原理明显不同）；硬阈值 F≥{params["thresholds"]["F"]}、'
+                 f'C≥{params["thresholds"]["C"]}、H≥{params["thresholds"]["H"]} 全过才计算'
                  '综合得分与风险（文档口径）；未过前提/未达阈值的对留表带标记、'
                  'S/R 空、不参与排名。' if caliber == 'theme' else
                  '阈值 F≥0.6、C≥0.5、H≥0.3 为"达标"参考标记（软阈值口径，'
@@ -184,7 +188,12 @@ def render_report(df: pd.DataFrame, params: dict, top_n: int = 20,
                  'Foreign=公开国家≠中国）；A_B=主题内高价值专利（引文网络内部节点被引次数前 '
                  f'{100 - int(params["high_value_quantile"]*100)}%'
                  f'（分位 {params["high_value_quantile"]}））的中国专利占比。')
-    lines.append('- 最终风险：R_AB = S_AB × (M_AB+V_B)/2。\n')
+    if caliber == 'theme':
+        rp = params.get('risk_powers', {'S': 0.6, 'MV': 0.4})
+        lines.append(f'- 最终风险：R_AB = S_AB^{rp["S"]} × ((M_AB+V_B)/2)^{rp["MV"]}'
+                     '（实验三加权幂公式；相对线性乘积更强调可替代性 S）。\n')
+    else:
+        lines.append('- 最终风险：R_AB = S_AB × (M_AB+V_B)/2。\n')
     lines.append('## 二、运行参数\n')
     lines.append(f'- 高价值分位：{params["high_value_quantile"]}；'
                  f'sigmoid k={params.get("sigmoid_k", 2.0)}；'
@@ -218,9 +227,12 @@ def render_report(df: pd.DataFrame, params: dict, top_n: int = 20,
                      '（含判定类别与理由，可复核）。\n')
     lines.append('## 三、总体结果\n')
     if caliber == 'theme':
+        tf = params['thresholds']['F']
+        tc = params['thresholds']['C']
+        thh = params['thresholds']['H']
         lines.append(f'- 技术主题数：{n_themes}；有序主题对数（X→Y，X≠Y）：{total_topics}')
         lines.append(f'- 未过双前提（问题相似度<0.5 或 H<0.3）：{n_premise}')
-        lines.append(f'- 未达硬阈值（F<0.6 或 C<0.5 或 H<0.3）：{n_thr}')
+        lines.append(f'- 未达硬阈值（F<{tf} 或 C<{tc} 或 H<{thh}）：{n_thr}')
         lines.append(f'- 达标替代候选并参与排名（R 可计算）：{ranked_n}')
         lines.append(f'- 标记统计（可叠加）：样本不足 {sample_short}、'
                      f'无高价值专利 {no_hv}\n')
@@ -289,11 +301,14 @@ def render_report(df: pd.DataFrame, params: dict, top_n: int = 20,
             lines.append('- 过滤后仍居首的 G06Q30（商业交易系统）的保留专利均为脑电广告/神经营销类'
                          '边缘应用（属纳入口径），并非管道错误。')
     elif caliber == 'theme':
-        n_f_fail = int((df['F_AB'] < params['thresholds']['F']).sum())
-        n_c_fail = int((df['C_AB'] < params['thresholds']['C']).sum())
-        n_h_fail = int((df['H_AB'] < params['thresholds']['H']).sum())
-        lines.append(f'- 硬阈值三条件的全表统计：F<0.6 的 {n_f_fail} 对、C<0.5 的 '
-                     f'{n_c_fail} 对、H<0.3 的 {n_h_fail} 对（含未过前提的对，'
+        tf = params['thresholds']['F']
+        tc = params['thresholds']['C']
+        thh = params['thresholds']['H']
+        n_f_fail = int((df['F_AB'] < tf).sum())
+        n_c_fail = int((df['C_AB'] < tc).sum())
+        n_h_fail = int((df['H_AB'] < thh).sum())
+        lines.append(f'- 硬阈值三条件的全表统计：F<{tf} 的 {n_f_fail} 对、C<{tc} 的 '
+                     f'{n_c_fail} 对、H<{thh} 的 {n_h_fail} 对（含未过前提的对，'
                      '其 F/C/H 亦照填）；与"未过双前提/未达阈值"两个标记合计对照，'
                      '可定位主要门槛。')
         # 终审修复（I-3）：达标率高系主题粒度领域特性归因（与实验二 H 临界窄带对照）
@@ -301,7 +316,7 @@ def render_report(df: pd.DataFrame, params: dict, top_n: int = 20,
             lines.append(f'- 达标率高达 {len(ranked)/total_topics*100:.0f}% 的原因：'
                          f'{n_themes} 个主题由同一 BCI 领域凝练而来，功能/场景普遍相似'
                          f'（F/C 均值≈{df["F_AB"].dropna().mean():.2f}），原理差异普遍'
-                         f'满足 H≥0.3（仅 {n_h_fail} 对不足）——F 是实际主要门槛；'
+                         f'满足 H≥{thh}（仅 {n_h_fail} 对不足）——F 是实际主要门槛；'
                          '这是主题粒度的领域特性，与实验二 6 对挤在 H 临界窄带'
                          '（0.288~0.303）形成对照，说明文档硬阈值在主题粒度下是稳健筛选器。')
         n_no_r = int((df['风险排名'].isna()
@@ -320,12 +335,16 @@ def render_report(df: pd.DataFrame, params: dict, top_n: int = 20,
                          '看 Top 表可逐项归因。')
             # 高风险线（用户 2026-08-20 定档）：R≥0.45。R 值域 0.327~0.508（乘法
             # 结构压缩，见"结论解读"），0.45 线恰覆盖风险排序前 ~5.5% 的相对高风险对。
-            n_high = int((ranked['R_AB'] >= 0.45).sum())
-            lines.append(f'- 高风险线（用户定档 R≥0.45）：{n_high} 对达标候选落入'
+            # 加权幂公式后 R 整体抬升（约 0.55~0.69），原 0.45 线已失去区分度；
+            # 改用 R≥0.65 作相对高风险线（约覆盖前 5%）。
+            high_cut = 0.65
+            n_high = int((ranked['R_AB'] >= high_cut).sum())
+            rp = params.get('risk_powers', {'S': 0.6, 'MV': 0.4})
+            lines.append(f'- 高风险线（加权幂口径定档 R≥{high_cut}）：{n_high} 对达标候选落入'
                          f'高风险区（占 {n_high/len(ranked)*100:.1f}%，即风险排序前 '
                          f'{n_high} 对）；R 最高 {ranked["R_AB"].max():.3f}。'
-                         '乘法结构下 R 绝对水平偏低（两个 [0,1] 因子相乘、S 上限约 '
-                         f'0.61），0.45 是相对高风险线而非绝对意义阈值。')
+                         f'公式 R=S^{rp["S"]}×((M+V)/2)^{rp["MV"]} 抬升了绝对水平，'
+                         f'{high_cut} 为相对高风险线而非绝对意义阈值。')
         else:
             lines.append('- 无达标替代候选：硬阈值与双前提联合判定下没有路线对同时满足'
                          '三条件——这是文档口径的如实结果，不代表各对之间没有风险差异'
@@ -448,6 +467,14 @@ def main() -> None:
     with open(os.path.join(ROOT, 'config.json'), encoding='utf-8') as f:
         cfg = json.load(f)
     suffix = cfg.get('input_suffix', '')
+    # 实验三硬阈值与风险幂指数以实验三 config 为准（不改根 config，避免影响实验一/二）
+    if suffix == '_theme':
+        theme_cfg_path = os.path.join(ROOT, '实验三_要素凝练主题', 'config.json')
+        with open(theme_cfg_path, encoding='utf-8') as f:
+            theme_cfg = json.load(f)
+        cfg['thresholds'] = theme_cfg['thresholds']
+        if 'risk_powers' in theme_cfg:
+            cfg['risk_powers'] = theme_cfg['risk_powers']
     df = pd.read_csv(os.path.join(ROOT, 'outputs', f'替代风险指标总表{suffix}.csv'),
                      dtype={'主题码': str})
     caliber = ('theme' if suffix == '_theme'

@@ -16,5 +16,7 @@ class TestGates:
         assert premise_pass(problem_sim=0.6, H=0.2) is False   # 原理无明显差异
 
     def test_threshold_pass(self):
-        assert threshold_pass(F=0.6, C=0.5, H=0.3) is True
-        assert threshold_pass(F=0.59, C=0.9, H=0.9) is False
+        # 实验三硬阈值：F≥0.5、C≥0.5、H≥0.3（F 按导师建议自 0.6 放宽）
+        assert threshold_pass(F=0.5, C=0.5, H=0.3) is True
+        assert threshold_pass(F=0.49, C=0.9, H=0.9) is False
+        assert threshold_pass(F=0.59, C=0.9, H=0.9) is True

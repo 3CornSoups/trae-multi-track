@@ -19,7 +19,8 @@ if _THEME_SCRIPTS not in sys.path:
 
 from embed_similarity import load_entity_vectors, symmetric_max_match
 from indicators import THRESHOLD_FLAG, jaccard, per_topic_indicators
-from theme_pairs import premise_pass, threshold_pass
+from theme_pairs import (premise_pass, threshold_pass, TH_F, TH_C, TH_H,
+                         RISK_S_POWER, RISK_MV_POWER)
 
 # 注（目录重构后）：BASE_DIR 为脚本所在目录（共用/scripts/）、ROOT 为上三级（项目根
 # =替代风险计算，其下有 outputs/ 与 config.json）、PROJECT_ROOT 为 多轨道。
@@ -81,10 +82,13 @@ def _main_theme(cfg: dict) -> None:
 
     对每个有序对动态计算 6 类实体集合的嵌入对称最佳匹配：
     problem_sim（前提①，≥0.5）与 F/C/H（P_sim→H=1−P_sim）；双前提全过才进入
-    硬阈值判定（F≥0.6/C≥0.5/H≥0.3），硬阈值全过才调用 per_topic_indicators
-    计算 S 与后续指标（R）；未过前提/未达阈值的对留行带标记、S/R 空、不参与排名。
+    硬阈值判定（F≥TH_F/C≥TH_C/H≥TH_H，实验三专属，见 theme_pairs），硬阈值全过才调用
+    per_topic_indicators 计算 S 与后续指标（R）；未过前提/未达阈值的对留行带标记、
+    S/R 空、不参与排名。
     dom=主题 X 的中国专利、for=主题 Y 的国外专利、exposure=主题 Y 全集（K/A/V）。
     """
+    # 实验三硬阈值以 theme_pairs 为准（不改根 config，避免影响实验一/二软阈值）
+    cfg = {**cfg, 'thresholds': {'F': TH_F, 'C': TH_C, 'H': TH_H}}
     patent = pd.read_csv(os.path.join(INTER_DIR, 'patent_route_theme.csv'),
                          dtype={'pub': str, 'topic_code': str, 'year': 'Int64'})
     patent['topic_code'] = patent['topic_code'].fillna('')
@@ -202,6 +206,8 @@ def _main_theme(cfg: dict) -> None:
                 min_patents=cfg['min_patents'],
                 exposure=theme_patents[y],
                 fch={'F': F, 'C': C, 'H': H},
+                risk_s_power=RISK_S_POWER,
+                risk_mv_power=RISK_MV_POWER,
             )
             row['problem_sim'] = problem_sim   # 终审修复（M-建议-5）
             rows.append(row)

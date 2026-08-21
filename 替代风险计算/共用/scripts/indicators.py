@@ -43,7 +43,7 @@ def per_topic_indicators(topic_code, topic_name, dom, for_, mainpath_nodes,
                          window_ends, high_value_threshold,
                          weights=(1, 1, 1), thresholds=None,
                          sigmoid_k=2.0, min_patents=3, fch=None,
-                         exposure=None):
+                         exposure=None, risk_s_power=1.0, risk_mv_power=1.0):
     """计算一个技术主题的全部替代风险指标。
 
     参数:
@@ -55,6 +55,9 @@ def per_topic_indicators(topic_code, topic_name, dom, for_, mainpath_nodes,
       weights: (w1, w2, w3) 原始权重，内部归一化
       fch: {'F','C','H'} 嵌入相似度覆盖值（None 时用 Jaccard，即旧行为）
       exposure: K/A/V 按此专利列表（含 is_cn）计算；None 时用 dom+for（旧行为）
+      risk_s_power / risk_mv_power: 最终风险指数；默认 1/1 即
+                  R = S × (M+V)/2；实验三用 0.6/0.4 即
+                  R = S^0.6 × ((M+V)/2)^0.4
     返回: dict（见 Task 3 Interfaces 说明），未定义指标为 None。
     """
     if thresholds is None:
@@ -134,7 +137,12 @@ def per_topic_indicators(topic_code, topic_name, dom, for_, mainpath_nodes,
         V = None
         flags.append('无高价值专利')
 
-    R = S * (M + V) / 2.0 if (S is not None and V is not None) else None
+    if S is not None and V is not None:
+        mv = (M + V) / 2.0
+        # 默认 power=1,1 → 线性乘积；实验三 0.6/0.4 → 加权幂乘
+        R = float(S ** risk_s_power * mv ** risk_mv_power)
+    else:
+        R = None
 
     return {
         'topic_code': topic_code, 'topic_name': topic_name,

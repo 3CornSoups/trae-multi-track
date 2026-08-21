@@ -151,6 +151,9 @@ class TestPathsFilteredRun:
             assert ((vals >= 0) & (vals <= 1)).all(), f'{col} 越界'
 
 
+from theme_pairs import TH_F, TH_C, TH_H  # noqa: E402
+
+
 THEME_CSV = os.path.join(ROOT, '实验三_要素凝练主题', 'outputs', '替代风险指标总表_theme.csv')
 
 
@@ -164,19 +167,17 @@ class TestThemeRun:
         for col in ['S_AB', 'R_AB']:
             vals = df[col].dropna()
             assert ((vals >= 0) & (vals <= 1)).all(), f'{col} 越界'
-        # 硬阈值语义：有排名的行 F/C/H 必须全部达标
+        # 硬阈值语义：有排名的行 F/C/H 必须全部达标（实验三 F 阈值见 theme_pairs.TH_F）
         for _, r in ranked.iterrows():
-            assert r['F_AB'] >= 0.6 and r['C_AB'] >= 0.5 and r['H_AB'] >= 0.3
-        # 终审修复（M-建议-4）：计数断言（1980 对 / 30 未过前提 / 230 未达阈值 /
-        # 140 无高价值 / 1580 达标排名；Top1=C31→C8 R=0.5084）
+            assert r['F_AB'] >= TH_F and r['C_AB'] >= TH_C and r['H_AB'] >= TH_H
+        # F 放宽至 0.5 后：1980 对 / 30 未过前提 / 8 未达阈值 / 170 无高价值 / 1772 达标排名
         n_premise = (df['标记'].fillna('').str.contains('未过前提')).sum()
         n_thr = (df['标记'].fillna('').str.contains('未达阈值')).sum()
         n_no_hv = (df['标记'].fillna('').str.contains('无高价值专利')).sum()
         assert len(df) == 1980
-        assert n_premise == 30 and n_thr == 230 and n_no_hv == 140
-        assert (df['风险排名'].notna()).sum() == 1580
+        assert n_premise == 30 and n_thr == 8 and n_no_hv == 170
+        assert (df['风险排名'].notna()).sum() == 1772
         top = df.dropna(subset=['风险排名']).sort_values('风险排名').iloc[0]
         assert top['主题码'] == 'C31→C8'
-        assert abs(top['R_AB'] - 0.5084) < 0.001
-        # 终审修复（M-建议-5）：问题相似度（前提①）落盘——theme 版全表该列有值
+        assert abs(top['R_AB'] - 0.6894) < 0.001
         assert (df['问题相似度'].notna()).sum() == len(df)

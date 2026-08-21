@@ -218,3 +218,26 @@ class TestExposureOverride:
         # A：阈值 0 → exposure 全部高价值；CN 2/5 = 0.4
         assert r['A'] == 0.4
         assert r['V'] == (1 / 3 + 1 - 0.4) / 2
+
+
+class TestRiskWeightedPower:
+    """实验三加权幂：R = S^0.6 × ((M+V)/2)^0.4。"""
+
+    def test_theme_powers_vs_linear(self):
+        dom = make_patents([('CN1', 2001, 5, {'a'}, {'x'}, {'p1'}),
+                            ('CN2', 2002, 5, {'a'}, {'x'}, {'p1'}),
+                            ('CN3', 2003, 5, {'a'}, {'x'}, {'p1'})])
+        for_ = make_patents([('US1', 2020, 10, {'a'}, {'x'}, {'p2'}),
+                             ('US2', 2021, 10, {'a'}, {'x'}, {'p2'}),
+                             ('US3', 2022, 10, {'a'}, {'x'}, {'p2'})])
+        kwargs = dict(weights=(1, 1, 1), thresholds={'F': 0.0, 'C': 0.0, 'H': 0.0},
+                    fch={'F': 0.6, 'C': 0.6, 'H': 0.6})
+        r_lin = per_topic_indicators('T', 't', dom, for_, empty_mainpath(),
+                                     WINDOW_ENDS, 0, **kwargs)
+        r_pow = per_topic_indicators('T', 't', dom, for_, empty_mainpath(),
+                                     WINDOW_ENDS, 0, risk_s_power=0.6,
+                                     risk_mv_power=0.4, **kwargs)
+        mv = (r_lin['M'] + r_lin['V']) / 2.0
+        assert r_lin['R'] == pytest.approx(r_lin['S'] * mv)
+        assert r_pow['R'] == pytest.approx(r_lin['S'] ** 0.6 * mv ** 0.4)
+        assert r_pow['R'] != pytest.approx(r_lin['R'])

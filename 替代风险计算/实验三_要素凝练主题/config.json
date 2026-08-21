@@ -5,9 +5,13 @@
     "w3": 1
   },
   "thresholds": {
-    "F": 0.6,
+    "F": 0.5,
     "C": 0.5,
     "H": 0.3
+  },
+  "risk_powers": {
+    "S": 0.6,
+    "MV": 0.4
   },
   "sigmoid_k": 2.0,
   "windows": [
